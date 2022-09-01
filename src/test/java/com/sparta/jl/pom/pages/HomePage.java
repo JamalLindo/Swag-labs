@@ -1,5 +1,8 @@
 package com.sparta.jl.pom.pages;
 
+
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,6 +42,7 @@ public class HomePage extends NavigationPage {
     private final By shoppingCartAmountBadge = new By.ByClassName("shopping_cart_badge");
 
     public HomePage(WebDriver driver) {
+        setDriver(driver);
         this.driver = driver;
     }
 
