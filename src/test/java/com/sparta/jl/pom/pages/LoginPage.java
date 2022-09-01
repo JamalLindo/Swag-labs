@@ -1,6 +1,7 @@
 package com.sparta.jl.pom.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Arrays;
@@ -21,9 +22,9 @@ public class LoginPage {
     }
 
     public void loginToPage(String userName){
-        driver.findElement(pageUserName).sendKeys(userName);
-        driver.findElement(pagePassword).sendKeys(password);
-        driver.findElement(loginButton).click();
+        driver.findElement(By.id("user-name")).sendKeys(userName, Keys.TAB, password, Keys.ENTER);
+//        driver.findElement(pagePassword).sendKeys(password);
+//        driver.findElement(loginButton).click();
     }
     public HomePage goToHomePage() {
         loginToPage("standard_user");
@@ -52,6 +53,6 @@ public class LoginPage {
         if (containsValidUserName) {
             loginToPage(inputtedUserName);
         }
-        return driver.findElement(By.className("error-message-container error")).getText();
+        return driver.findElement(By.className("error-message-container")).getAttribute("data-test");
     }
 }
