@@ -16,7 +16,7 @@ public class CartPage {
     By inventoryItemName = new By.ById("inventory_item_name");
     By removeButton = new By.ById("btn btn_secondary btn_small cart_button");
     By continueBtn = new By.ById("continue");
-    By removeBtnName = By.ById("");
+//    By removeBtnName = removeButton.findElement();
     public CartPage(WebDriver driver) {
         this.driver = driver;
 
@@ -49,9 +49,9 @@ public class CartPage {
         return removeBtns;
     }
 
-    public List listOfRemoveItemBtnNames() {
-
-    }
+//    public List listOfRemoveItemBtnNames() {
+//        List<String> removeNames = driver.findElements(removeButton).;
+//    }
 
 
 //    public HomePage gotoAllItemsPage(WebDriver driver) {
