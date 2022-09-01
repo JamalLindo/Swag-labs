@@ -47,7 +47,6 @@ public class CartPageTest {
     @Test
     @DisplayName("Check that when continue shopping and going back to cart items persists")
     void checkThatWhenContinueShoppingAndGoingBackToCartItemsPersists() {
-        
 
     }
 
