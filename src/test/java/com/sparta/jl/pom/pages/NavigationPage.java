@@ -76,7 +76,6 @@ public abstract class NavigationPage {
     public LoginPage goToLoginPageFromSidebar(){
         driver.findElement(logoutSidebarLink).click();
         return new LoginPage(driver);
-
     }
 
     public String getUrlFromLogoutSideBar() {
@@ -84,10 +83,9 @@ public abstract class NavigationPage {
         return driver.getCurrentUrl();
     }
 
-    public CheckoutPage goToCheckoutPageFromCartIcon() {
+    public CartPage goToCheckoutPageFromCartIcon() {
         driver.findElement(shoppingCartLink).click();
-        return new CheckoutPage();
-        //return new CheckoutPage(driver);
+        return new CartPage(driver);
     }
 
     public String getUrlFromCartLink() {

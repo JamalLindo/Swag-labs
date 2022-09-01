@@ -1,8 +1,10 @@
 package com.sparta.jl.tests;
 
+
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
+import com.sparta.jl.pom.pages.HomePage;
 import org.junit.jupiter.api.*;
 
 import org.openqa.selenium.By;
@@ -11,20 +13,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class NavigationPageTests {
+
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
     private static LoginPage loginPage;
+
     static WebDriver driver;
     static HomePage homePage;
 
     @BeforeAll
     static void setupAll() {
+
         POMUtils.setDriverLocation(DRIVER_LOCATION);
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         homePage = loginPage.goToHomePage();
 
     }
-
     @AfterAll
     static void tearDownAll() {
         driver.quit();
