@@ -8,15 +8,21 @@ import java.util.Arrays;
 public class LoginPage {
     private WebDriver driver;
     private static final String password = "secret_sauce";
+    private By errorMessage = By.className("error-message-container error");
+    private By pageUserName = By.id("user-name");
+    private By pagePassword = By.id("password");
+    private By loginButton = By.id("login-button");
+
+
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
     public void loginToPage(String userName){
-        driver.findElement(By.id("user-name")).sendKeys(userName);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("login-button")).click();
+        driver.findElement(pageUserName).sendKeys(userName);
+        driver.findElement(pagePassword).sendKeys(password);
+        driver.findElement(loginButton).click();
     }
     public HomePage goToHomePage() {
         loginToPage("standard_user");
@@ -35,7 +41,7 @@ public class LoginPage {
 
     public String lockedOutLogin() {
         loginToPage("locked_out_user");
-        return driver.findElement(By.className("error-message-container error")).getText();
+        return driver.findElement(errorMessage).getText();
     }
 
     public String invalidLogin() {
