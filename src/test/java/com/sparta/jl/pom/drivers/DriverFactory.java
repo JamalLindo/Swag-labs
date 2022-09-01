@@ -24,9 +24,9 @@ public class DriverFactory {
             firefoxDriver = new FirefoxDriver();
             return firefoxDriver;
 
-        } else if (driverOptions.equals(DriverOptions.FIREFOX_IPHONE13)) {
-            firefoxDriver.manage().window().setSize(new Dimension(390, 844));
-            return firefoxDriver;
+        } else if (driverOptions.equals(DriverOptions.CHROME_IPHONE13)) {
+            chromeDriver.manage().window().setSize(new Dimension(390, 844));
+            return chromeDriver;
         }
 
         return null;

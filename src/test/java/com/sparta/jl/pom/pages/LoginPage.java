@@ -26,17 +26,17 @@ public class LoginPage {
     }
     public HomePage goToHomePage() {
         loginToPage("standard_user");
-        return new HomePage();
+        return new HomePage(driver);
     }
 
     public HomePage goToProblemHomePage() {
         loginToPage("problem_user");
-        return new HomePage();
+        return new HomePage(driver);
     }
 
     public HomePage performanceGlitchedUserLogin() {
         loginToPage("performance_glitch_user");
-        return new HomePage();
+        return new HomePage(driver);
     }
 
     public String lockedOutLogin() {
