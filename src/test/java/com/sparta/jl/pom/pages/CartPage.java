@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
+
 public class CartPage extends NavigationPage{
     WebDriver driver;
     final By continueShoppingBtn = new By.ById("continue-shopping");
@@ -22,12 +23,13 @@ public class CartPage extends NavigationPage{
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
-//        setDriver
+        setDriver(driver);
     }
 
     public String getUrl() {
         return driver.getCurrentUrl();
     }
+
     public HomePage gotoContinueShopping(WebDriver driver) {
         driver.findElement(continueShoppingBtn).click();
         return new HomePage(driver);
@@ -55,13 +57,13 @@ public class CartPage extends NavigationPage{
         driver.findElement(removeOnesie).click();
         driver.findElement(removeRedTShirt).click();
     }
-//    public List listOfRemoveItemBtn() {
-//        List<WebElement> removeBtns = driver.findElements(removeButton);
-//        return removeBtns;
-//    }
+    
+//  public List listOfRemoveItemBtn() {
+//      List<WebElement> removeBtns = driver.findElements(removeButton);
+//      return removeBtns;
+//  }
 
-//    public List listOfRemoveItemBtnNames() {
-//        List<String> removeNames = driver.findElements(removeButton).;
-//    }
-
+//  public List listOfRemoveItemBtnNames() {
+//      List<String> removeNames = driver.findElements(removeButton).;
+//  }
 }

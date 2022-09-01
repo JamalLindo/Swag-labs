@@ -34,12 +34,12 @@ public class CartPageTest {
         driver.get("https://www.saucedemo.com/");
         driver.findElement(By.id("user-name")).sendKeys("standard_user", Keys.TAB, "secret_sauce", Keys.ENTER);
         homePage = new HomePage(driver);
-//        cartPage = new CartPage(driver);
     }
 
     @Test
     @DisplayName("Check continue shopping button returns to HomePage")
     void checkContinueShoppingButtonReturnsToHomePage() {
+
         homePage = cartPage.gotoContinueShopping(driver);
         Assertions.assertEquals("https://www.saucedemo.com/inventory.html", homePage.getUrl());
     }
@@ -48,6 +48,7 @@ public class CartPageTest {
     @DisplayName("Check that when continue shopping and going back to cart items persists")
     void checkThatWhenContinueShoppingAndGoingBackToCartItemsPersists() {
         
+
     }
 
     @Test
@@ -55,6 +56,7 @@ public class CartPageTest {
     void checkThatCorrectAmountOfItemsInCart() {
         homePage.addBikeLightToCart();
         homePage.addBoltTShirtToCart();
+
         cartPage = homePage.gotoCartPage(driver);
         int actual = cartPage.listOfItems().size();
         Assertions.assertEquals(2,actual);
@@ -86,7 +88,7 @@ public class CartPageTest {
     }
     @AfterAll
     static void tearDownAll() {
-//        driver.quit();
+        //driver.quit();
     }
 
 }
