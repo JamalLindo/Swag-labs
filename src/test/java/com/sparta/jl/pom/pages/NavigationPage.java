@@ -13,6 +13,7 @@ public abstract class NavigationPage {
     private static final By facebookSocial = new By.ByClassName("social_facebook");
     private static final By linkedinSocial = new By.ByClassName("social_linkedin");
     private static final By burgerMenuBtn = new By.ById("react-burger-menu-btn");
+
     private static final By allItemsSidebarLink = new By.ById("inventory_sidebar_link");
     private static final By aboutSidebarLink = new By.ById("about_sidebar_link");
     private static final By logoutSidebarLink = new By.ById("logout_sidebar_link");
@@ -75,7 +76,6 @@ public abstract class NavigationPage {
 
     public LoginPage goToLoginPageFromSidebar(){
         driver.findElement(logoutSidebarLink).click();
-        //return new LoginPage();
         return new LoginPage(driver);
     }
 
