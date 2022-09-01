@@ -34,19 +34,6 @@ public class LoginPageTests {
         Assertions.assertEquals("https://www.saucedemo.com/inventory.html", loginPage.goToProblemHomePage().getURL());
     }
 
-//    @Test
-//    @DisplayName("Check that invalid user returns correct error message on screen")
-//    void checkThatInvalidUserReturnsCorrectErrorMessageOnScreen(){
-//        System.out.println(loginPage.invalidLogin());
-//        //Assertions.assertEquals("Epic sadface: Username and password do not match any user in this service", loginPage.invalidLogin());
-//    }
-
-//    @Test
-//    @DisplayName("Check that locked out user returns correct response")
-//    void checkThatLockedOutUserReturnsCorrectResponse(){
-//        Assertions.assertEquals();
-//    }
-
     @Test
     @DisplayName("Check that glitched user works")
     void checkThatGlitchedUserWorks(){
