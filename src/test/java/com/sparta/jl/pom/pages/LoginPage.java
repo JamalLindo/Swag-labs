@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class LoginPage {
     private WebDriver driver;
     private static final String password = "secret_sauce";
-    private By errorMessage = By.className("error-message-container error");
+    private By errorMessage = By.className("error-message-container");
     private By pageUserName = By.id("user-name");
     private By pagePassword = By.id("password");
     private By loginButton = By.id("login-button");
@@ -16,6 +16,7 @@ public class LoginPage {
 
 
     public LoginPage(WebDriver driver) {
+        driver.get("https://www.saucedemo.com/");
         this.driver = driver;
     }
 
@@ -26,17 +27,17 @@ public class LoginPage {
     }
     public HomePage goToHomePage() {
         loginToPage("standard_user");
-        return new HomePage();
+        return new HomePage(driver);
     }
 
     public HomePage goToProblemHomePage() {
         loginToPage("problem_user");
-        return new HomePage();
+        return new HomePage(driver);
     }
 
     public HomePage performanceGlitchedUserLogin() {
         loginToPage("performance_glitch_user");
-        return new HomePage();
+        return new HomePage(driver);
     }
 
     public String lockedOutLogin() {
