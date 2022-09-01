@@ -37,44 +37,44 @@ public class CheckoutPage1 extends NavigationPage {
             return "good to go";
         }
     }
-
-    @Override
-    public String getURLFromTwitterLink() {
-        return super.getURLFromTwitterLink();
-    }
-
-    @Override
-    public String getURLFromFacebookLink() {
-        return super.getURLFromFacebookLink();
-    }
-
-    @Override
-    public String getURLFromLinkedinLink() {
-        return super.getURLFromLinkedinLink();
-    }
-
-    @Override
-    public String getURLFromAboutLink() {
-        return super.getURLFromAboutLink();
-    }
-
-    @Override
-    public LoginPage goToLoginPageFromSidebar() {
-        return super.goToLoginPageFromSidebar();
-    }
-
-    @Override
-    public String getUrlFromLogoutSideBar() {
-        return super.getUrlFromLogoutSideBar();
-    }
-
-    @Override
-    public CartPage goToCheckoutPageFromCartIcon() {
-        return super.goToCheckoutPageFromCartIcon();
-    }
-
-    @Override
-    public String getUrlFromCartLink() {
-        return super.getUrlFromCartLink();
-    }
+//
+//    @Override
+//    public String getURLFromTwitterLink() {
+//        return super.getURLFromTwitterLink();
+//    }
+//
+//    @Override
+//    public String getURLFromFacebookLink() {
+//        return super.getURLFromFacebookLink();
+//    }
+//
+//    @Override
+//    public String getURLFromLinkedinLink() {
+//        return super.getURLFromLinkedinLink();
+//    }
+//
+//    @Override
+//    public String getURLFromAboutLink() {
+//        return super.getURLFromAboutLink();
+//    }
+//
+//    @Override
+//    public LoginPage goToLoginPageFromSidebar() {
+//        return super.goToLoginPageFromSidebar();
+//    }
+//
+//    @Override
+//    public String getUrlFromLogoutSideBar() {
+//        return super.getUrlFromLogoutSideBar();
+//    }
+//
+//    @Override
+//    public CartPage goToCheckoutPageFromCartIcon() {
+//        return super.goToCheckoutPageFromCartIcon();
+//    }
+//
+//    @Override
+//    public String getUrlFromCartLink() {
+//        return super.getUrlFromCartLink();
+//    }
 }

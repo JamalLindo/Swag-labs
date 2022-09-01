@@ -1,6 +1,7 @@
 package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.pages.CartPage;
+import com.sparta.jl.pom.pages.CheckoutPage1;
 import com.sparta.jl.pom.pages.HomePage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
@@ -8,10 +9,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class CartPageTest {
     static WebDriver driver;
     private CartPage cartPage;
     private HomePage homePage;
+    private  CheckoutPage1 checkoutPage1;
 
     public void addAllItemToBasket() {
         homePage.addBackpackToCart();
@@ -39,55 +44,81 @@ public class CartPageTest {
     @Test
     @DisplayName("Check continue shopping button returns to HomePage")
     void checkContinueShoppingButtonReturnsToHomePage() {
-
-        homePage = cartPage.gotoContinueShopping(driver);
+        cartPage = homePage.gotoCartPage(driver);
+        homePage = cartPage.clickContinueShopping(driver);
         Assertions.assertEquals("https://www.saucedemo.com/inventory.html", homePage.getUrl());
     }
-
     @Test
     @DisplayName("Check that when continue shopping and going back to cart items persists")
     void checkThatWhenContinueShoppingAndGoingBackToCartItemsPersists() {
-
+        homePage.addAllItemsToCart();
+        cartPage = homePage.gotoCartPage(driver);
+        List expected = cartPage.listOfItems();
+        homePage = cartPage.clickContinueShopping(driver);
+        cartPage = homePage.gotoCartPage(driver);
+        List actual = cartPage.listOfItems();
+        Assertions.assertEquals(expected.size(), actual.size());
     }
 
+    @Test
+    @DisplayName("Check that return list item names are correct")
+    void checkThatReturnListItemNamesAreCorrect() {
+        homePage.addAllItemsToCart();
+        cartPage = homePage.gotoCartPage(driver);
+        List actual = cartPage.listOfInventoryItemNames();
+        System.out.println(Arrays.toString(actual.toArray()));
+    }
     @Test
     @DisplayName("Check that correct amount of items in cart")
     void checkThatCorrectAmountOfItemsInCart() {
         homePage.addBikeLightToCart();
         homePage.addBoltTShirtToCart();
-
         cartPage = homePage.gotoCartPage(driver);
         int actual = cartPage.listOfItems().size();
         Assertions.assertEquals(2,actual);
     }
-
     @Test
     @DisplayName("Check that when all items added is correct amount")
     void checkThatWhenAllItemsAddedIsCorrectAmount() {
-        addAllItemToBasket();
+        homePage.addAllItemsToCart();
+        cartPage = homePage.gotoCartPage(driver);
         int actual = cartPage.listOfItems().size();
         Assertions.assertEquals(6,actual);
     }
-
     @Test
     @DisplayName("Check all remove buttons work")
     void checkAllRemoveButtonsWork() {
-        addAllItemToBasket();
+        homePage.addAllItemsToCart();
+        cartPage = homePage.gotoCartPage(driver);
         cartPage.removeAllItems();
         int actual = cartPage.listOfItems().size();
         Assertions.assertEquals(0,actual);
     }
-
     @Test
     @DisplayName("Check that the remove buttons work")
     void checkThatTheRemoveButtonsWork() {
-        addAllItemToBasket();
+        homePage.addAllItemsToCart();
+        cartPage = homePage.gotoCartPage(driver);
         cartPage.removeBackpack();
-        System.out.println(cartPage.listOfItems().size());
+        Assertions.assertEquals(5, cartPage.listOfItems().size());
+    }
+
+    @Test
+    @DisplayName("Check list of remove buttons are correct numbers")
+    void checkListOfRemoveButtonsAreCorrectNumbers() {
+        homePage.addAllItemsToCart();
+        cartPage = homePage.gotoCartPage(driver);
+        Assertions.assertEquals(cartPage.listOfItems().size(), cartPage.listOfRemoveItemBtn().size());
+    }
+
+    @Test
+    @DisplayName("Check Checkout button goes to correct url")
+    void checkCheckoutButtonGoesToCorrectUrl() {
+        checkoutPage1 = cartPage.clickCheckout(driver);
+        Assertions.assertEquals("https://www.saucedemo.com/checkout-step-one.html", checkoutPage1.getURL());
     }
     @AfterAll
     static void tearDownAll() {
         //driver.quit();
     }
-
 }

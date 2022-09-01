@@ -25,19 +25,19 @@ public class LoginPageTests {
     @Test
     @DisplayName("Check that the login to home page works")
     void checkThatTheLoginToHomePageWorks(){
-        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", loginPage.goToHomePage().getURL());
+        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", loginPage.goToHomePage().getUrl());
     }
 
     @Test
     @DisplayName("Check that login to problem user returns a home page")
     void checkThatLoginToProblemUserReturnsAHomePage(){
-        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", loginPage.goToProblemHomePage().getURL());
+        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", loginPage.goToProblemHomePage().getUrl());
     }
 
     @Test
     @DisplayName("Check that glitched user works")
     void checkThatGlitchedUserWorks(){
-        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", loginPage.performanceGlitchedUserLogin().getURL());
+        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", loginPage.performanceGlitchedUserLogin().getUrl());
     }
 
     @AfterAll
