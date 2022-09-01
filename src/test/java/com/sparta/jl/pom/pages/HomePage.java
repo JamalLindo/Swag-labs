@@ -39,6 +39,7 @@ public class HomePage extends NavigationPage {
 
     public void addRedTShirtToCart() {
         driver.findElement(addToCartRedTShirtButton).click();
+        System.out.println(driver.findElement(shoppingCartAmountBadge).getText());
     }
     public void addOnesieToCart() {
         driver.findElement(addToCartOnesieButton).click();
