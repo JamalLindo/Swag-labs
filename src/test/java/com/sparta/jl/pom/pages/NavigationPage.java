@@ -75,8 +75,8 @@ public abstract class NavigationPage {
 
     public LoginPage goToLoginPageFromSidebar(){
         driver.findElement(logoutSidebarLink).click();
-        //return new LoginPage();
         return new LoginPage(driver);
+
     }
 
     public String getUrlFromLogoutSideBar() {
