@@ -1,8 +1,5 @@
 package com.sparta.jl.pom.pages;
 
-
-
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,14 +22,12 @@ public class HomePage extends NavigationPage {
     private final By addToCartBoltTShirtButton = new By.ById("add-to-cart-sauce-labs-bolt-t-shirt");
     private final By addToCartBikeLightButton = new By.ById("add-to-cart-sauce-labs-bike-light");
     private final By addToCartBackpackButton = new By.ById("add-to-cart-sauce-labs-backpack");
-
     private final By removeFromCartRedTShirtButton = new By.ById("remove-test.allthethings()-t-shirt-(red)");
     private final By removeFromCartOnesieButton = new By.ById("remove-sauce-labs-onesie");
     private final By removeFromCartFleeceJacketButton = new By.ById("remove-sauce-labs-fleece-jacket");
     private final By removeFromCartBoltTShirtButton = new By.ById("remove-sauce-labs-bolt-t-shirt");
     private final By removeFromCartBikeLightButton = new By.ById("remove-sauce-labs-bike-light");
     private final By removeFromCartBackpackButton = new By.ById("remove-sauce-labs-backpack");
-
     private final By productSortByMenu = new By.ByClassName("product_sort_container");
     private final By sortByNameAZ = new By.ByCssSelector("#header_container > div.header_secondary_container > div.right_component > span > select > option:nth-child(1)");
     private final By sortByNameZA = new By.ByCssSelector("#header_container > div.header_secondary_container > div.right_component > span > select > option:nth-child(2)");
@@ -89,6 +84,7 @@ public class HomePage extends NavigationPage {
 
     public String getUrl() {
         return driver.getCurrentUrl();
+    }
 
     public void sortProductsByNameAscending() {
         driver.findElement(productSortByMenu).click();
@@ -114,7 +110,6 @@ public class HomePage extends NavigationPage {
         for (int i = 0; i < priceListWebEl.size(); i++) {
             priceList[i] = Double.valueOf(priceListWebEl.get(i).getText().replace("$", ""));
         }
-        System.out.println(Arrays.toString(priceList));
 
         return priceList;
     }
