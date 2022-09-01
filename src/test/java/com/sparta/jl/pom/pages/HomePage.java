@@ -1,7 +1,7 @@
 package com.sparta.jl.pom.pages;
 
 
-public class HomePage extends NavigationPage{
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
