@@ -37,6 +37,7 @@ public class HomePage extends NavigationPage {
     private final By shoppingCartAmountBadge = new By.ByClassName("shopping_cart_badge");
 
     public HomePage(WebDriver driver) {
+        setDriver(driver);
         this.driver = driver;
     }
 

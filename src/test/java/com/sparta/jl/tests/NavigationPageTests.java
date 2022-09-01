@@ -1,6 +1,8 @@
 package com.sparta.jl.tests;
 
+import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.HomePage;
+import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 
 import org.openqa.selenium.By;
@@ -9,21 +11,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class NavigationPageTests {
+    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
+    private static LoginPage loginPage;
     static WebDriver driver;
     static HomePage homePage;
 
     @BeforeAll
     static void setupAll() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        POMUtils.setDriverLocation(DRIVER_LOCATION);
         driver = new ChromeDriver();
-
-    }
-
-    @BeforeEach
-    void setup() {
-        driver.get("https://www.saucedemo.com/");
-        driver.findElement(By.id("user-name")).sendKeys("standard_user", Keys.TAB, "secret_sauce", Keys.ENTER);
-        homePage = new HomePage(driver);
+        loginPage = new LoginPage(driver);
+        homePage = loginPage.goToHomePage();
 
     }
 
@@ -89,7 +87,6 @@ public class NavigationPageTests {
         void checkThatTheAboutSidebarLinkWorks() {
             Assertions.assertEquals("https://saucelabs.com/", homePage.getURLFromAboutLink());
         }
-
 
     }
 
