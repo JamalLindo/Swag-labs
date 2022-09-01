@@ -50,4 +50,4 @@ out/
 *.iws
 
 # Files
-*./resources/
+src/test/resources
