@@ -1,5 +1,6 @@
 # Web GUI Testing Project (Swag Labs)
 
+
 **Overview:**
 This project provides a GUI testing framework for Swaglabs website (https://www.saucedemo.com/).
 
