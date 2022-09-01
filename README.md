@@ -12,6 +12,7 @@ The project provides a Page Object Model (POM) for testers to use. The POM has b
 - DriverOptions - This is an enum class that is acting as a connecting point between POMs and the webdrivers declared under the DriverFactory class.
 
 **POMUtils:**
+
 Because the webdriver file is located under the resource directory, it is included under the .gitignore file. Therefore, assuming that a tester who wants to use this framework might want to put their driver file in a different path, the POMUtils class provides a different method that does not ask for the path of the driver file and it provides flexibility for testers to use different types of webdrivers.
 
 **Pages:**
@@ -21,6 +22,7 @@ Because the webdriver file is located under the resource directory, it is includ
 NavigationPage -
 
 **Tests:**
+
 These are the test classes prepared for testers to be used based on the test methods previously created under the Pages package. Classes created under the Tests package include:
 - HomePageTests.
 - LoginPageTests.
