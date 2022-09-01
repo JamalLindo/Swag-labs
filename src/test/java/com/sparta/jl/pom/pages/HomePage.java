@@ -2,6 +2,11 @@ package com.sparta.jl.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HomePage extends NavigationPage {
     private WebDriver driver;
@@ -39,7 +44,6 @@ public class HomePage extends NavigationPage {
 
     public void addRedTShirtToCart() {
         driver.findElement(addToCartRedTShirtButton).click();
-        System.out.println(driver.findElement(shoppingCartAmountBadge).getText());
     }
     public void addOnesieToCart() {
         driver.findElement(addToCartOnesieButton).click();
@@ -72,5 +76,33 @@ public class HomePage extends NavigationPage {
     }
     public void removeBackpackFromCart() { driver.findElement(removeFromCartBackpackButton).click(); }
 
+    public void sortProductsByNameAscending() {
+        driver.findElement(productSortByMenu).click();
+        driver.findElement(sortByNameAZ).click();
+    }
+    public void sortProductsByNameDescending() {
+        driver.findElement(productSortByMenu).click();
+        driver.findElement(sortByNameZA).click();
+    }
+    public void sortProductsByPriceAscending() {
+        driver.findElement(productSortByMenu).click();
+        driver.findElement(sortByPriceLowHigh).click();
+    }
+    public void sortProductsByPriceDescending() {
+        driver.findElement(productSortByMenu).click();
+        driver.findElement(sortByPriceHighLow).click();
+    }
 
+    public Double[] getArrayOfPrices() {
+        List<WebElement> priceListWebEl = driver.findElements(prices);
+        Double[] priceList = new Double[priceListWebEl.size()];
+
+        for (int i = 0; i < priceListWebEl.size(); i++) {
+            priceList[i] = Double.valueOf(priceListWebEl.get(i).getText().replace("$", ""));
+        }
+        System.out.println(Arrays.toString(priceList));
+
+        return priceList;
+    }
 }
+
