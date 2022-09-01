@@ -1,4 +1,8 @@
 package com.sparta.jl.pom.drivers;
 
-public class DriverOptions {
+public enum DriverOptions {
+    CHROME,
+    SAFARI,
+    FIREFOX,
+    FIREFOX_IPHONE13,
 }
