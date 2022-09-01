@@ -1,13 +1,13 @@
 package com.sparta.jl.tests;
 
-import com.sparta.jl.pom.pages.CheckoutPage;
+import com.sparta.jl.pom.pages.CartPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class CheckoutPageTest {
+public class CartPageTest {
     static WebDriver driver;
-    private CheckoutPage checkoutPage;
+    private CartPage checkoutPage;
 
     @BeforeAll
     static void setupAll() {

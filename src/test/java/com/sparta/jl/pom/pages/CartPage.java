@@ -7,15 +7,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
-public class CheckoutPage{
+public class CartPage {
     WebDriver driver;
 
-    By burgerMenu = new By.ById("react-burger-menu-btn");
-    By inventorySidebarLink = new By.ById("react-burger-menu-btn");
+//    By burgerMenu = new By.ById("react-burger-menu-btn");
+//    By inventorySidebarLink = new By.ById("react-burger-menu-btn");
     By continueShoppingBtn = new By.ById("continue-shopping");
     By inventoryItemName = new By.ById("inventory_item_name");
-
-    public CheckoutPage(WebDriver driver) {
+    By removeButton = new By.ById("btn btn_secondary btn_small cart_button");
+    By continueBtn = new By.ById("continue");
+    By removeBtnName = By.ById("");
+    public CartPage(WebDriver driver) {
         this.driver = driver;
 
         //remove after driver can be passed
@@ -27,20 +29,28 @@ public class CheckoutPage{
     public String getUrl() {
         return driver.getCurrentUrl();
     }
-    public HomePage gotoContinueShopping(WebDriver driver) {
-        driver.findElement(continueShoppingBtn).click();
-//        System.out.println(driver.getCurrentUrl());
-//        return null;
-        return new HomePage(driver);
-    }
+//    public HomePage gotoContinueShopping(WebDriver driver) {
+//        driver.findElement(continueShoppingBtn).click();
+//        return new HomePage(driver);
+//    }
+
+//    public CheckoutPage1 gotoCheckoutPage1(WebDriver driver) {
+//        driver.findElement(continueBtn).click();
+//        return new CheckoutPage1(driver);
+//    }
 
     public List listOfItems() {
-        List<WebElement> items = driver.findElements();
+        List<WebElement> items = driver.findElements(inventoryItemName);
         return items;
     }
 
     public List listOfRemoveItemBtn() {
-        List<WebElement> removeBtns = driver.findElements(By)
+        List<WebElement> removeBtns = driver.findElements(removeButton);
+        return removeBtns;
+    }
+
+    public List listOfRemoveItemBtnNames() {
+
     }
 
 
