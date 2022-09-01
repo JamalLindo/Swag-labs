@@ -76,4 +76,8 @@ public class HomePage extends NavigationPage {
     }
     public void removeBackpackFromCart() { driver.findElement(removeFromCartBackpackButton).click(); }
 
+    public String getURL() {
+        return driver.getCurrentUrl();
+    }
+
 }
