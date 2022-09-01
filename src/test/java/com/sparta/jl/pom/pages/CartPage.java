@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -63,8 +64,12 @@ public class CartPage extends NavigationPage{
       return removeBtns;
   }
 
-  public List listOfInventoryItemNames() {
-        List<WebElement> itemNames = driver.findElements(inventoryItemName);
+  public List listOfItemNames() {
+        List<WebElement> items = listOfItems();
+        List<String> itemNames = new ArrayList<>();
+      for (int i = 0; i < items.size(); i++) {
+          itemNames.add(items.get(i).findElement(inventoryItemName).getText());
+      }
         return itemNames;
   }
 }

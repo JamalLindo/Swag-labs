@@ -1,8 +1,10 @@
 package com.sparta.jl.tests;
 
+import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CartPage;
 import com.sparta.jl.pom.pages.CheckoutPage1;
 import com.sparta.jl.pom.pages.HomePage;
+import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,9 +16,11 @@ import java.util.List;
 
 public class CartPageTest {
     static WebDriver driver;
+    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
     private CartPage cartPage;
     private HomePage homePage;
-    private  CheckoutPage1 checkoutPage1;
+    private CheckoutPage1 checkoutPage1;
+    private LoginPage loginPage;
 
     public void addAllItemToBasket() {
         homePage.addBackpackToCart();
@@ -30,15 +34,15 @@ public class CartPageTest {
 
     @BeforeAll
     static void setupAll() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        POMUtils.setDriverLocation(DRIVER_LOCATION);
         driver = new ChromeDriver();
     }
 
     @BeforeEach
     void setup() {
-        driver.get("https://www.saucedemo.com/");
-        driver.findElement(By.id("user-name")).sendKeys("standard_user", Keys.TAB, "secret_sauce", Keys.ENTER);
-        homePage = new HomePage(driver);
+        loginPage = new LoginPage(driver);
+//        loginPage.loginToPage("standard_user");  //doesn't work
+        homePage = loginPage.goToHomePage();
     }
 
     @Test
@@ -65,8 +69,14 @@ public class CartPageTest {
     void checkThatReturnListItemNamesAreCorrect() {
         homePage.addAllItemsToCart();
         cartPage = homePage.gotoCartPage(driver);
-        List actual = cartPage.listOfInventoryItemNames();
-        System.out.println(Arrays.toString(actual.toArray()));
+        List actual = cartPage.listOfItemNames();
+        String expected = "[Test.allTheThings() T-Shirt (Red)" +
+                ", Sauce Labs Onesie" +
+                ", Sauce Labs Fleece Jacket" +
+                ", Sauce Labs Bolt T-Shirt" +
+                ", Sauce Labs Bike Light" +
+                ", Sauce Labs Backpack]";
+        Assertions.assertEquals(expected, actual);
     }
     @Test
     @DisplayName("Check that correct amount of items in cart")
@@ -119,6 +129,6 @@ public class CartPageTest {
     }
     @AfterAll
     static void tearDownAll() {
-        //driver.quit();
+        driver.quit();
     }
 }
