@@ -2,11 +2,9 @@ package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.HomePage;
+import com.sparta.jl.pom.HomePageUtils;
 import com.sparta.jl.pom.pages.LoginPage;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -22,6 +20,7 @@ public class HomePageTests {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         homePage = loginPage.goToHomePage();
+
     }
 
     @BeforeEach
@@ -30,7 +29,22 @@ public class HomePageTests {
     }
 
     @Test
-    @DisplayName("test")
-    void test(){
+    @DisplayName("Products are sorted price ascending when sort by is price ascending")
+    void productsAreSortedPriceAscendingWhenSortByIsPriceAscending(){
+        homePage.sortProductsByPriceAscending();
+        Double[] priceList = homePage.getArrayOfPrices();
+        Assertions.assertTrue(HomePageUtils.PriceIsAscending(priceList));
+    }
+    @Test
+    @DisplayName("Products are sorted price ascending when sort by is price ascending")
+    void productsAreSortedPriceDescendingWhenSortByIsPriceDescending(){
+        homePage.sortProductsByPriceDescending();
+        Double[] priceList = homePage.getArrayOfPrices();
+        Assertions.assertTrue(HomePageUtils.PriceIsDescending(priceList));
+    }
+    
+    @AfterAll
+    static void tearDownAll() {
+        driver.quit();
     }
 }
