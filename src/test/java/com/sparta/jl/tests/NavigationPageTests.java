@@ -4,11 +4,9 @@ package com.sparta.jl.tests;
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
-import com.sparta.jl.pom.pages.HomePage;
 import org.junit.jupiter.api.*;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -25,9 +23,12 @@ public class NavigationPageTests {
 
         POMUtils.setDriverLocation(DRIVER_LOCATION);
         driver = new ChromeDriver();
+    }
+
+    @BeforeEach
+    void setup() {
         loginPage = new LoginPage(driver);
         homePage = loginPage.goToHomePage();
-
     }
     @AfterAll
     static void tearDownAll() {
@@ -38,30 +39,21 @@ public class NavigationPageTests {
     class FooterTests {
 
         @Test
-        @DisplayName("Check that the twitter link opens on a new tab")
-        void checkThatTheTwitterLinkOpensOnANewTab() {
-
-        }
-
-        @Test
         @DisplayName("Check that the Facebook link is correct")
         void checkThatTheFacebookLinkIsCorrect() {
-            Assertions.assertEquals("https://www.facebook.com/saucelabs", homePage.getURLFromFacebookLink());
-
+            Assertions.assertEquals("https://www.facebook.com/saucelabs", homePage.getUrlFromFacebookLink());
         }
 
         @Test
         @DisplayName("Check that the Linkedin link is correct")
         void checkThatTheLinkedinLinkIsCorrect() {
-            Assertions.assertEquals("https://www.linkedin.com/company/sauce-labs/", homePage.getURLFromLinkedinLink());
-
+            Assertions.assertEquals("https://www.linkedin.com/company/sauce-labs/", homePage.getUrlFromLinkedinLink());
         }
 
         @Test
         @DisplayName("Check that the twitter link is correct")
         void checkThatTheTwitterLinkIsCorrect() {
-            Assertions.assertEquals("https://twitter.com/saucelabs", homePage.getURLFromTwitterLink());
-
+            Assertions.assertEquals("https://twitter.com/saucelabs", homePage.getUrlFromTwitterLink());
         }
 
         @Test
@@ -81,6 +73,12 @@ public class NavigationPageTests {
         void checkThatTheLinkedinLinkOpensANewTab() {
             Assertions.assertNotEquals(driver.getWindowHandle(), homePage.getWindowHandleOfOpenedLinkedinTab());
         }
+
+        @Test
+        @DisplayName("Check that the footer img is the correct src")
+        void checkThatTheFooterImgIsTheCorrectSrc() {
+            Assertions.assertEquals("https://www.saucedemo.com/static/media/SwagBot_Footer_graphic.2e87acec.png", homePage.getSourceOfFooterImage());
+        }
     }
 
     @Nested
@@ -89,9 +87,51 @@ public class NavigationPageTests {
         @Test
         @DisplayName("Check that the about sidebar link works")
         void checkThatTheAboutSidebarLinkWorks() {
-            Assertions.assertEquals("https://saucelabs.com/", homePage.getURLFromAboutLink());
+            Assertions.assertEquals("https://saucelabs.com/", homePage.getURLFromAboutSidebarLink());
         }
 
+        @Test
+        @DisplayName("Check that the all items Side bar goes to homepage ")
+        void checkThatTheAllItemsSideBarGoesToHomepage() {
+            Assertions.assertEquals("https://www.saucedemo.com/inventory.html", homePage.getURLFromAllItemsSidebarLink());
+        }
+
+        @Test
+        @DisplayName("Check that the logout sidebar link take you to the login page")
+        void checkThatTheLogoutSidebarLinkTakeYouToTheLoginPage() {
+            Assertions.assertEquals("https://www.saucedemo.com/", homePage.getUrlFromLogoutSidebarLink());
+        }
+
+        @Test
+        @DisplayName("Check that the reset app state sidebar link from homepage give correct url")
+        void checkThatTheResetAppStateSidebarLinkGiveTheSameUrl() {
+            Assertions.assertEquals("https://www.saucedemo.com/inventory.html",homePage.getUrlFromResetAppStateSidebarLink() );
+        }
+
+        @Test
+        @DisplayName("Check that the reset app state sidebar link from the cart page stays on the same url")
+        void checkThatTheResetAppStateSidebarLinkFromTheCartPageStaysOnTheSameUrl() {
+            Assertions.assertEquals("https://www.saucedemo.com/cart.html", homePage.goToCheckoutPageFromCartIcon().getUrlFromResetAppStateSidebarLink());
+        }
+
+        @Test
+        @DisplayName("Check that the reset app state removes cart badge")
+        void checkThatTheResetAppStateRemovesCartBadge() {
+            homePage.addBikeLightToCart();
+            Assertions.assertEquals("1", homePage.getBadgeFromShoppingCartIcon());
+            homePage.goToResetAppStateSideBarLink();
+            Assertions.assertThrows(NoSuchElementException.class,() -> homePage.getBadgeFromShoppingCartIcon() );
+        }
+
+        @Nested
+        class CartIcon{
+
+            @Test
+            @DisplayName("Check that clicking the cart icon takes you to the Cart page")
+            void checkThatClickingTheCartIconTakesYouToTheCartPage() {
+                Assertions.assertEquals("https://www.saucedemo.com/cart.html", homePage.getUrlFromCartLink());
+            }
+        }
     }
 
 
