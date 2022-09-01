@@ -4,5 +4,5 @@ public enum DriverOptions {
     CHROME,
     SAFARI,
     FIREFOX,
-    FIREFOX_IPHONE13,
+    CHROME_IPHONE13,
 }

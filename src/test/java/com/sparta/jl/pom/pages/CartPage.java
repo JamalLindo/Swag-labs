@@ -7,60 +7,63 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
-public class CartPage {
-    WebDriver driver;
 
-//    By burgerMenu = new By.ById("react-burger-menu-btn");
-//    By inventorySidebarLink = new By.ById("react-burger-menu-btn");
-    By continueShoppingBtn = new By.ById("continue-shopping");
-    By inventoryItemName = new By.ById("inventory_item_name");
-    By removeButton = new By.ById("btn btn_secondary btn_small cart_button");
-    By continueBtn = new By.ById("continue");
-//    By removeBtnName = removeButton.findElement();
+public class CartPage extends NavigationPage{
+    WebDriver driver;
+    final By continueShoppingBtn = new By.ById("continue-shopping");
+    final By inventoryItemName = new By.ById("inventory_item_name");
+    final By checkoutBtn = new By.ById("checkout");
+    final By cartItem = new By.ByClassName("cart_item");
+    final By removeBackpack = new By.ById("remove-sauce-labs-backpack");
+    final By removeBikeLight = new By.ById("remove-sauce-labs-bike-light");
+    final By removeBoltTShirt = new By.ById("remove-sauce-labs-bolt-t-shirt");
+    final By removeFleeceJacket = new By.ById("remove-sauce-labs-fleece-jacket");
+    final By removeOnesie = new By.ById("remove-sauce-labs-onesie");
+    final By removeRedTShirt = new By.ById("remove-test.allthethings()-t-shirt-(red)");
+
     public CartPage(WebDriver driver) {
         this.driver = driver;
-
-        //remove after driver can be passed
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/cart.html"); //remove this after
+        setDriver(driver);
     }
 
     public String getUrl() {
         return driver.getCurrentUrl();
     }
-//    public HomePage gotoContinueShopping(WebDriver driver) {
-//        driver.findElement(continueShoppingBtn).click();
-//        return new HomePage(driver);
-//    }
 
-//    public CheckoutPage1 gotoCheckoutPage1(WebDriver driver) {
-//        driver.findElement(continueBtn).click();
-//        return new CheckoutPage1(driver);
-//    }
+    public HomePage gotoContinueShopping(WebDriver driver) {
+        driver.findElement(continueShoppingBtn).click();
+        return new HomePage(driver);
+    }
+
+    public CheckoutPage1 gotoCheckoutPage1(WebDriver driver) {
+        driver.findElement(checkoutBtn).click();
+        return new CheckoutPage1(driver);
+    }
 
     public List listOfItems() {
-        List<WebElement> items = driver.findElements(inventoryItemName);
+        List<WebElement> items = driver.findElements(cartItem);
         return items;
     }
 
-    public List listOfRemoveItemBtn() {
-        List<WebElement> removeBtns = driver.findElements(removeButton);
-        return removeBtns;
+    public void removeBackpack() {
+        driver.findElement(removeBackpack).click();
     }
 
-//    public List listOfRemoveItemBtnNames() {
-//        List<String> removeNames = driver.findElements(removeButton).;
-//    }
+    public void removeAllItems() {
+        driver.findElement(removeBackpack).click();
+        driver.findElement(removeBikeLight).click();
+        driver.findElement(removeBoltTShirt).click();
+        driver.findElement(removeFleeceJacket).click();
+        driver.findElement(removeOnesie).click();
+        driver.findElement(removeRedTShirt).click();
+    }
+    
+//  public List listOfRemoveItemBtn() {
+//      List<WebElement> removeBtns = driver.findElements(removeButton);
+//      return removeBtns;
+//  }
 
-
-//    public HomePage gotoAllItemsPage(WebDriver driver) {
-//        driver.findElement(burgerMenu).click();
-//        driver.findElement(inventorySidebarLink).click();
-//        return new HomePage(driver);
-//    }
-
-
-
-
+//  public List listOfRemoveItemBtnNames() {
+//      List<String> removeNames = driver.findElements(removeButton).;
+//  }
 }
