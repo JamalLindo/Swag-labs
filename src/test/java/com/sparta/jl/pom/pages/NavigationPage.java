@@ -20,6 +20,8 @@ public abstract class NavigationPage {
     private static final By shoppingCartLink = new By.ByClassName("shopping_cart_link");
     private static final By footerImage = new By.ByClassName("footer_robot");
 
+    private static final By shoppingCartBadge = new By.ByClassName("shopping_cart_badge");
+
 
     public void setDriver(WebDriver driver) {
         this.driver = driver;
@@ -37,17 +39,17 @@ public abstract class NavigationPage {
         }
     }
 
-    public String getURLFromTwitterLink() {
+    public String getUrlFromTwitterLink() {
         switchToOpenedTab(twitterSocial);
         return driver.getCurrentUrl();
     }
 
-    public String getURLFromFacebookLink() {
+    public String getUrlFromFacebookLink() {
         switchToOpenedTab(facebookSocial);
         return driver.getCurrentUrl();
     }
 
-    public String getURLFromLinkedinLink() {
+    public String getUrlFromLinkedinLink() {
         switchToOpenedTab(linkedinSocial);
         return driver.getCurrentUrl();
     }
@@ -67,19 +69,31 @@ public abstract class NavigationPage {
         return driver.getWindowHandle();
     }
 
-    public String getURLFromAboutLink(){
+    public String getURLFromAboutSidebarLink(){
         driver.findElement(burgerMenuBtn).click();
         driver.findElement(aboutSidebarLink).click();
         return driver.getCurrentUrl();
     }
 
     public LoginPage goToLoginPageFromSidebar(){
+        driver.findElement(burgerMenuBtn).click();
         driver.findElement(logoutSidebarLink).click();
         return new LoginPage(driver);
     }
 
-    public String getUrlFromLogoutSideBar() {
+    public String getUrlFromLogoutSidebarLink() {
        goToLoginPageFromSidebar();
+        return driver.getCurrentUrl();
+    }
+
+    public HomePage goToHomePageFromAllItemsSidebarLink() {
+        driver.findElement(burgerMenuBtn).click();
+        driver.findElement(allItemsSidebarLink).click();
+        return new HomePage(driver);
+    }
+
+    public String getURLFromAllItemsSidebarLink(){
+        goToHomePageFromAllItemsSidebarLink();
         return driver.getCurrentUrl();
     }
 
@@ -88,9 +102,24 @@ public abstract class NavigationPage {
         return new CartPage(driver);
     }
 
+    public void goToResetAppStateSideBarLink() {
+        driver.findElement(burgerMenuBtn).click();
+        driver.findElement(resetSideBarLink).click();
+
+    }
+
+    public String getUrlFromResetAppStateSidebarLink() {
+        goToResetAppStateSideBarLink();
+        return driver.getCurrentUrl();
+    }
+
     public String getUrlFromCartLink() {
         goToCheckoutPageFromCartIcon();
         return driver.getCurrentUrl();
+    }
+
+    public String getBadgeFromShoppingCartIcon() {
+        return driver.findElement(shoppingCartBadge).getText();
     }
 
     public String getSourceOfFooterImage(){

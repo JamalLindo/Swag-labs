@@ -1,10 +1,12 @@
 package com.sparta.jl.pom.pages;
 
-
-
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HomePage extends NavigationPage {
     private WebDriver driver;
@@ -20,14 +22,12 @@ public class HomePage extends NavigationPage {
     private final By addToCartBoltTShirtButton = new By.ById("add-to-cart-sauce-labs-bolt-t-shirt");
     private final By addToCartBikeLightButton = new By.ById("add-to-cart-sauce-labs-bike-light");
     private final By addToCartBackpackButton = new By.ById("add-to-cart-sauce-labs-backpack");
-
     private final By removeFromCartRedTShirtButton = new By.ById("remove-test.allthethings()-t-shirt-(red)");
     private final By removeFromCartOnesieButton = new By.ById("remove-sauce-labs-onesie");
     private final By removeFromCartFleeceJacketButton = new By.ById("remove-sauce-labs-fleece-jacket");
     private final By removeFromCartBoltTShirtButton = new By.ById("remove-sauce-labs-bolt-t-shirt");
     private final By removeFromCartBikeLightButton = new By.ById("remove-sauce-labs-bike-light");
     private final By removeFromCartBackpackButton = new By.ById("remove-sauce-labs-backpack");
-
     private final By productSortByMenu = new By.ByClassName("product_sort_container");
     private final By sortByNameAZ = new By.ByCssSelector("#header_container > div.header_secondary_container > div.right_component > span > select > option:nth-child(1)");
     private final By sortByNameZA = new By.ByCssSelector("#header_container > div.header_secondary_container > div.right_component > span > select > option:nth-child(2)");
@@ -35,6 +35,8 @@ public class HomePage extends NavigationPage {
     private final By sortByPriceHighLow = new By.ByCssSelector("#header_container > div.header_secondary_container > div.right_component > span > select > option:nth-child(4)");
     private final By shoppingCartLink = new By.ByClassName("shopping_cart_link");
     private final By shoppingCartAmountBadge = new By.ByClassName("shopping_cart_badge");
+    private final By cartLinkBtn = new By.ByClassName("shopping_cart_link");
+    private CartPage cartPage;
 
     public HomePage(WebDriver driver) {
         setDriver(driver);
@@ -43,7 +45,6 @@ public class HomePage extends NavigationPage {
 
     public void addRedTShirtToCart() {
         driver.findElement(addToCartRedTShirtButton).click();
-        System.out.println(driver.findElement(shoppingCartAmountBadge).getText());
     }
     public void addOnesieToCart() {
         driver.findElement(addToCartOnesieButton).click();
@@ -76,4 +77,41 @@ public class HomePage extends NavigationPage {
     }
     public void removeBackpackFromCart() { driver.findElement(removeFromCartBackpackButton).click(); }
 
+    public CartPage gotoCartPage(WebDriver driver) {
+        driver.findElement(cartLinkBtn).click();
+        return new CartPage(driver);
+    }
+
+    public String getUrl() {
+        return driver.getCurrentUrl();
+    }
+
+    public void sortProductsByNameAscending() {
+        driver.findElement(productSortByMenu).click();
+        driver.findElement(sortByNameAZ).click();
+    }
+    public void sortProductsByNameDescending() {
+        driver.findElement(productSortByMenu).click();
+        driver.findElement(sortByNameZA).click();
+    }
+    public void sortProductsByPriceAscending() {
+        driver.findElement(productSortByMenu).click();
+        driver.findElement(sortByPriceLowHigh).click();
+    }
+    public void sortProductsByPriceDescending() {
+        driver.findElement(productSortByMenu).click();
+        driver.findElement(sortByPriceHighLow).click();
+    }
+
+    public Double[] getArrayOfPrices() {
+        List<WebElement> priceListWebEl = driver.findElements(prices);
+        Double[] priceList = new Double[priceListWebEl.size()];
+
+        for (int i = 0; i < priceListWebEl.size(); i++) {
+            priceList[i] = Double.valueOf(priceListWebEl.get(i).getText().replace("$", ""));
+        }
+
+        return priceList;
+    }
 }
+
