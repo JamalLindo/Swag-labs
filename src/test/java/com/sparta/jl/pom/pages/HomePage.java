@@ -40,6 +40,8 @@ public class HomePage extends NavigationPage {
     private final By sortByPriceHighLow = new By.ByCssSelector("#header_container > div.header_secondary_container > div.right_component > span > select > option:nth-child(4)");
     private final By shoppingCartLink = new By.ByClassName("shopping_cart_link");
     private final By shoppingCartAmountBadge = new By.ByClassName("shopping_cart_badge");
+    private final By cartLinkBtn = new By.ByClassName("shopping_cart_link");
+    private CartPage cartPage;
 
     public HomePage(WebDriver driver) {
         setDriver(driver);
@@ -79,6 +81,14 @@ public class HomePage extends NavigationPage {
         driver.findElement(removeFromCartBikeLightButton).click();
     }
     public void removeBackpackFromCart() { driver.findElement(removeFromCartBackpackButton).click(); }
+
+    public CartPage gotoCartPage(WebDriver driver) {
+        driver.findElement(cartLinkBtn).click();
+        return new CartPage(driver);
+    }
+
+    public String getUrl() {
+        return driver.getCurrentUrl();
 
     public void sortProductsByNameAscending() {
         driver.findElement(productSortByMenu).click();
