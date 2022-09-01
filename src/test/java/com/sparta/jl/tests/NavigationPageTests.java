@@ -23,7 +23,7 @@ public class NavigationPageTests {
     void setup() {
         driver.get("https://www.saucedemo.com/");
         driver.findElement(By.id("user-name")).sendKeys("standard_user", Keys.TAB, "secret_sauce", Keys.ENTER);
-        homePage = new HomePage();
+        homePage = new HomePage(driver);
         homePage.setDriver(driver);
     }
 
