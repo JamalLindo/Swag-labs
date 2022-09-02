@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class CheckoutPage2 extends NavigationPage {
+public class CheckoutStepTwoPage extends NavigationPage {
     private WebDriver driver;
     private HomePage homePage;
     private static final By checkoutBtn = new By.ById("checkout");
@@ -33,7 +33,7 @@ public class CheckoutPage2 extends NavigationPage {
     private static final By tax = new By.ByClassName("summary_tax_label");
     private static final By total = new By.ByClassName("summary_total_label");
 
-    public CheckoutPage2(WebDriver driver) {
+    public CheckoutStepTwoPage(WebDriver driver) {
         this.driver = driver;
         driver.findElement(shoppingCartLink).click();
         driver.findElement(checkoutBtn).click();

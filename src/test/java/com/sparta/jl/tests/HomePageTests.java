@@ -31,16 +31,13 @@ public class HomePageTests {
     @Test
     @DisplayName("Products are sorted price ascending when sort by is price ascending")
     void productsAreSortedPriceAscendingWhenSortByIsPriceAscending(){
-        homePage.sortProductsByPriceAscending();
-        Double[] priceList = homePage.getArrayOfPrices();
-        Assertions.assertTrue(HomePageUtils.PriceIsAscending(priceList));
+        Assertions.assertTrue(homePage.sortProductsByPriceAscending().isPriceAscending());
     }
+    
     @Test
     @DisplayName("Products are sorted price ascending when sort by is price ascending")
     void productsAreSortedPriceDescendingWhenSortByIsPriceDescending(){
-        homePage.sortProductsByPriceDescending();
-        Double[] priceList = homePage.getArrayOfPrices();
-        Assertions.assertTrue(HomePageUtils.PriceIsDescending(priceList));
+        Assertions.assertTrue(homePage.sortProductsByPriceDescending().isPriceDescending());
     }
     
     @AfterAll

@@ -1,6 +1,6 @@
 package com.sparta.jl.pom.pages;
 
-import com.sparta.jl.pom.pages.CheckoutPage.CheckoutPage1;
+import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepOnePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,9 +37,9 @@ public class CartPage extends NavigationPage{
         return new HomePage(driver);
     }
 
-    public CheckoutPage1 clickCheckout(WebDriver driver) {
+    public CheckoutStepOnePage clickCheckout(WebDriver driver) {
         driver.findElement(checkoutBtn).click();
-        return new CheckoutPage1(driver);
+        return new CheckoutStepOnePage(driver);
     }
 
     public List listOfItems() {
