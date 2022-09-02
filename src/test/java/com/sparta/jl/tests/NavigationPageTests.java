@@ -14,7 +14,6 @@ public class NavigationPageTests {
 
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
     private static LoginPage loginPage;
-
     static WebDriver driver;
     static HomePage homePage;
 
@@ -30,6 +29,7 @@ public class NavigationPageTests {
         loginPage = new LoginPage(driver);
         homePage = loginPage.goToHomePage();
     }
+
     @AfterAll
     static void tearDownAll() {
         driver.quit();
@@ -42,12 +42,6 @@ public class NavigationPageTests {
         @DisplayName("Check that the Facebook link is correct")
         void checkThatTheFacebookLinkIsCorrect() {
             Assertions.assertEquals("https://www.facebook.com/saucelabs", homePage.getUrlFromFacebookLink());
-        }
-
-        @Test
-        @DisplayName("Check that the Linkedin link is correct")
-        void checkThatTheLinkedinLinkIsCorrect() {
-            Assertions.assertEquals("https://www.linkedin.com/company/sauce-labs/", homePage.getUrlFromLinkedinLink());
         }
 
         @Test
@@ -82,7 +76,7 @@ public class NavigationPageTests {
     }
 
     @Nested
-    class SidebarTests{
+    class SidebarTests {
 
         @Test
         @DisplayName("Check that the about sidebar link works")
@@ -105,7 +99,7 @@ public class NavigationPageTests {
         @Test
         @DisplayName("Check that the reset app state sidebar link from homepage give correct url")
         void checkThatTheResetAppStateSidebarLinkGiveTheSameUrl() {
-            Assertions.assertEquals("https://www.saucedemo.com/inventory.html",homePage.getUrlFromResetAppStateSidebarLink() );
+            Assertions.assertEquals("https://www.saucedemo.com/inventory.html", homePage.getUrlFromResetAppStateSidebarLink());
         }
 
         @Test
@@ -117,14 +111,11 @@ public class NavigationPageTests {
         @Test
         @DisplayName("Check that the reset app state removes cart badge")
         void checkThatTheResetAppStateRemovesCartBadge() {
-            homePage.addBikeLightToCart();
-            Assertions.assertEquals("1", homePage.getBadgeFromShoppingCartIcon());
-            homePage.goToResetAppStateSideBarLink();
-            Assertions.assertThrows(NoSuchElementException.class,() -> homePage.getBadgeFromShoppingCartIcon() );
+            Assertions.assertThrows(NoSuchElementException.class, () -> homePage.addBikeLightToCart().goToResetAppStateSideBarLink().getBadgeFromShoppingCartIcon());
         }
 
         @Nested
-        class CartIcon{
+        class CartIcon {
 
             @Test
             @DisplayName("Check that clicking the cart icon takes you to the Cart page")
@@ -133,8 +124,4 @@ public class NavigationPageTests {
             }
         }
     }
-
-
-
-
 }
