@@ -3,6 +3,7 @@ package com.sparta.jl.tests;
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CartPage;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutCompletePage;
+import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepOnePage;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepTwoPage;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
@@ -18,8 +19,10 @@ public class CheckoutStepTwoPageTest {
     private LoginPage loginPage;
     private CartPage cartPage;
     private CheckoutStepTwoPage checkoutStepTwoPage;
+    private CheckoutStepOnePage checkoutStepOnePage;
     private CheckoutCompletePage checkoutCompletePage;
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
+
 
     @BeforeAll
     static void setupAll() {
@@ -58,8 +61,6 @@ public class CheckoutStepTwoPageTest {
     @DisplayName("Check that correct amount of items in cart")
     void checkThatCorrectAmountOfItemsInCart() {
         cartPage = homePage.gotoCartPage(driver);
-        //homePage.addBikeLightToCart();
-        //homePage.addBoltTShirtToCart();
         Assertions.assertEquals(0, checkoutStepTwoPage.listOfItems().size());
     }
 
@@ -69,8 +70,8 @@ public class CheckoutStepTwoPageTest {
         Assertions.assertEquals("https://www.saucedemo.com/cart.html", checkoutStepTwoPage.getUrlFromCartLink());
     }
 
-    //@Nested
-    //class SidebarTests{
+    @Nested
+    class SidebarTests{
 
         @Test
         @DisplayName("Check that the all items sidebar goes to homepage ")
@@ -99,9 +100,10 @@ public class CheckoutStepTwoPageTest {
         @Test
         @DisplayName("Check that the reset app state sidebar link from the cart page stays on the same url")
         void checkThatTheResetAppStateSidebarLinkFromTheCartPageStaysOnTheSameUrl() {
+
             assertEquals("https://www.saucedemo.com/cart.html", checkoutStepTwoPage.goToCheckoutPageFromCartIcon().getUrlFromResetAppStateSidebarLink());
         }
-    //}
+    }
 
     @AfterAll
     static void tearDownAll() {

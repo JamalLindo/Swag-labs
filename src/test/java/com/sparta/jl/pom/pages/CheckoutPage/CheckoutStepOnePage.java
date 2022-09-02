@@ -62,3 +62,4 @@ public class CheckoutStepOnePage extends NavigationPage {
         return super.getUrlFromCartLink();
     }
 }
+
