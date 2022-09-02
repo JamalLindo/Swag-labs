@@ -8,9 +8,10 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CartPage extends NavigationPage{
     WebDriver driver;
+    private HomePage homePage;
+    private LoginPage loginPage;
     final By continueShoppingBtn = new By.ById("continue-shopping");
     final By checkoutBtn = new By.ById("checkout");
     final By cartItem = new By.ByClassName("cart_item");
@@ -59,18 +60,88 @@ public class CartPage extends NavigationPage{
         driver.findElement(removeOnesie).click();
         driver.findElement(removeRedTShirt).click();
     }
-    
-  public List listOfRemoveItemBtn() {
+
+    public List listOfRemoveItemBtn() {
       List<WebElement> removeBtns = driver.findElements(removeButton);
       return removeBtns;
-  }
+    }
 
-  public List listOfItemNames() {
+    public List listOfItemNames() {
         List<WebElement> items = listOfItems();
         List<String> itemNames = new ArrayList<>();
       for (int i = 0; i < items.size(); i++) {
           itemNames.add(items.get(i).findElement(inventoryItemName).getText());
       }
         return itemNames;
-  }
+    }
+
+    public boolean isItemsPersistent() {
+        loginPage = new LoginPage(driver);
+        homePage = loginPage.goToHomePage();
+        homePage.addAllItemsToCart();
+        homePage.gotoCartPage(driver);
+        List expected = listOfItems();
+        homePage = clickContinueShopping(driver);
+        homePage.gotoCartPage(driver);
+        List actual = listOfItems();
+        return actual.size() == expected.size();
+    }
+
+    public boolean isReturnItemListCorrect() {
+        loginPage = new LoginPage(driver);
+        homePage = loginPage.goToHomePage();
+        homePage.addAllItemsToCart();
+        homePage.gotoCartPage(driver);
+        String actual = listOfItemNames().toString();
+        String expected = "[Test.allTheThings() T-Shirt (Red)" +
+                ", Sauce Labs Onesie" +
+                ", Sauce Labs Fleece Jacket" +
+                ", Sauce Labs Bolt T-Shirt" +
+                ", Sauce Labs Bike Light" +
+                ", Sauce Labs Backpack]";
+        return (actual.equals(expected));
+    }
+
+    public int numberOfSomeItemsInCart() {
+        loginPage = new LoginPage(driver);
+        homePage = loginPage.goToHomePage();
+        homePage.addBikeLightToCart();
+        homePage.addBoltTShirtToCart();
+        homePage.gotoCartPage(driver);
+        return listOfItems().size();
+    }
+
+    public int numberOfAllItemsInCart() {
+        loginPage = new LoginPage(driver);
+        homePage = loginPage.goToHomePage();
+        homePage.addAllItemsToCart();
+        homePage.gotoCartPage(driver);
+        return listOfItems().size();
+    }
+
+    public int removeAllItemsButton(){
+        loginPage = new LoginPage(driver);
+        homePage = loginPage.goToHomePage();
+        homePage.addAllItemsToCart();
+        homePage.gotoCartPage(driver);
+        removeAllItems();
+        return listOfItems().size();
+    }
+
+    public int removeOneItemButton() {
+        loginPage = new LoginPage(driver);
+        homePage=loginPage.goToHomePage();
+        homePage.addAllItemsToCart();
+        homePage.gotoCartPage(driver);
+        removeBackpack();
+        return listOfItems().size();
+    }
+
+    public boolean numberOfRemoveButtons() {
+        loginPage = new LoginPage(driver);
+        homePage=loginPage.goToHomePage();
+        homePage.addAllItemsToCart();
+        homePage.gotoCartPage(driver);
+        return listOfRemoveItemBtn().size() == listOfItems().size();
+    }
 }
