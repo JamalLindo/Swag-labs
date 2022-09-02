@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CartPage extends NavigationPage{
     WebDriver driver;
     private HomePage homePage;
@@ -136,5 +135,13 @@ public class CartPage extends NavigationPage{
         homePage.gotoCartPage(driver);
         removeBackpack();
         return listOfItems().size();
+    }
+
+    public boolean numberOfRemoveButtons() {
+        loginPage = new LoginPage(driver);
+        homePage=loginPage.goToHomePage();
+        homePage.addAllItemsToCart();
+        homePage.gotoCartPage(driver);
+        return listOfRemoveItemBtn().size() == listOfItems().size();
     }
 }

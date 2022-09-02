@@ -2,7 +2,6 @@ package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CartPage;
-import com.sparta.jl.pom.pages.CheckoutPage.CheckoutPage1;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
@@ -13,9 +12,6 @@ public class CartPageTest {
     static WebDriver driver;
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver";
     private CartPage cartPage;
-    private HomePage homePage;
-    private CheckoutPage1 checkoutPage1;
-    private LoginPage loginPage;
 
 
     @BeforeAll
@@ -26,18 +22,15 @@ public class CartPageTest {
 
     @BeforeEach
     void setup() {
-        loginPage = new LoginPage(driver);
-//        loginPage.loginToPage("standard_user");  //doesn't work
-        homePage = loginPage.goToHomePage();
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = loginPage.goToHomePage();
         cartPage = homePage.gotoCartPage(driver);
     }
 
     @Test
     @DisplayName("Check continue shopping button returns to HomePage")
     void checkContinueShoppingButtonReturnsToHomePage() {
-        cartPage = homePage.gotoCartPage(driver);
-        homePage = cartPage.clickContinueShopping(driver);
-        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", homePage.getUrl());
+        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", cartPage.clickContinueShopping(driver).getUrl());
     }
     @Test
     @DisplayName("Check that when continue shopping and going back to cart items persists")
@@ -70,23 +63,19 @@ public class CartPageTest {
     @Test
     @DisplayName("Check that the remove buttons work")
     void checkThatTheRemoveButtonsWork() {
-
         Assertions.assertEquals(5, cartPage.removeOneItemButton());
     }
 
     @Test
     @DisplayName("Check list of remove buttons are correct numbers")
     void checkListOfRemoveButtonsAreCorrectNumbers() {
-        homePage.addAllItemsToCart();
-        cartPage = homePage.gotoCartPage(driver);
-        Assertions.assertEquals(cartPage.listOfItems().size(), cartPage.listOfRemoveItemBtn().size());
+        Assertions.assertTrue(cartPage.numberOfRemoveButtons());
     }
 
     @Test
     @DisplayName("Check Checkout button goes to correct url")
     void checkCheckoutButtonGoesToCorrectUrl() {
-        checkoutPage1 = cartPage.clickCheckout(driver);
-        Assertions.assertEquals("https://www.saucedemo.com/checkout-step-one.html", checkoutPage1.getURL());
+        Assertions.assertEquals("https://www.saucedemo.com/checkout-step-one.html", cartPage.clickCheckout(driver).getURL());
     }
     @AfterAll
     static void tearDownAll() {
