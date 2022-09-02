@@ -54,8 +54,9 @@ public class HomePage extends NavigationPage {
     public void addBoltTShirtToCart() {
         driver.findElement(addToCartBoltTShirtButton).click();
     }
-    public void addBikeLightToCart() {
+    public HomePage addBikeLightToCart() {
         driver.findElement(addToCartBikeLightButton).click();
+        return this;
     }
     public void addBackpackToCart() { driver.findElement(addToCartBackpackButton).click(); }
 

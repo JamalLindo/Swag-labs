@@ -1,7 +1,6 @@
 package com.sparta.jl.pom.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
@@ -69,20 +68,20 @@ public abstract class NavigationPage {
         return driver.getWindowHandle();
     }
 
-    public String getURLFromAboutSidebarLink(){
+    public String getURLFromAboutSidebarLink() {
         driver.findElement(burgerMenuBtn).click();
         driver.findElement(aboutSidebarLink).click();
         return driver.getCurrentUrl();
     }
 
-    public LoginPage goToLoginPageFromSidebar(){
+    public LoginPage goToLoginPageFromSidebar() {
         driver.findElement(burgerMenuBtn).click();
         driver.findElement(logoutSidebarLink).click();
         return new LoginPage(driver);
     }
 
     public String getUrlFromLogoutSidebarLink() {
-       goToLoginPageFromSidebar();
+        goToLoginPageFromSidebar();
         return driver.getCurrentUrl();
     }
 
@@ -92,7 +91,7 @@ public abstract class NavigationPage {
         return new HomePage(driver);
     }
 
-    public String getURLFromAllItemsSidebarLink(){
+    public String getURLFromAllItemsSidebarLink() {
         goToHomePageFromAllItemsSidebarLink();
         return driver.getCurrentUrl();
     }
@@ -102,9 +101,10 @@ public abstract class NavigationPage {
         return new CartPage(driver);
     }
 
-    public void goToResetAppStateSideBarLink() {
+    public NavigationPage goToResetAppStateSideBarLink() {
         driver.findElement(burgerMenuBtn).click();
         driver.findElement(resetSideBarLink).click();
+        return this;
 
     }
 
@@ -122,7 +122,7 @@ public abstract class NavigationPage {
         return driver.findElement(shoppingCartBadge).getText();
     }
 
-    public String getSourceOfFooterImage(){
+    public String getSourceOfFooterImage() {
         return driver.findElement(footerImage).getAttribute("src");
     }
 
