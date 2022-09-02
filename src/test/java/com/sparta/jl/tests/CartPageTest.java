@@ -2,16 +2,12 @@ package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CartPage;
-import com.sparta.jl.pom.pages.CheckoutPage1;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CartPageTest {

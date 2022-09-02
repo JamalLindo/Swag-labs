@@ -21,7 +21,7 @@ public class LoginPageTests {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
     }
-
+/*
     @Test
     @DisplayName("Check that the login to home page works")
     void checkThatTheLoginToHomePageWorks(){
@@ -39,6 +39,8 @@ public class LoginPageTests {
     void checkThatGlitchedUserWorks(){
         Assertions.assertEquals("https://www.saucedemo.com/inventory.html", loginPage.performanceGlitchedUserLogin().getUrl());
     }
+
+ */
 
     @AfterAll
     static void tearDownAll() {
