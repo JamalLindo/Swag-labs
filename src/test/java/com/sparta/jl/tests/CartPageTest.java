@@ -1,7 +1,10 @@
 package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
+import com.sparta.jl.pom.drivers.DriverFactory;
+import com.sparta.jl.pom.drivers.DriverOptions;
 import com.sparta.jl.pom.pages.CartPage;
+import com.sparta.jl.pom.pages.CheckoutPage.CheckoutPage1;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
@@ -18,20 +21,11 @@ public class CartPageTest {
     private CheckoutPage1 checkoutPage1;
     private LoginPage loginPage;
 
-    public void addAllItemToBasket() {
-        homePage.addBackpackToCart();
-        homePage.addBikeLightToCart();
-        homePage.addBoltTShirtToCart();
-        homePage.addFleeceJacketToCart();
-        homePage.addOnesieToCart();
-        homePage.addRedTShirtToCart();
-        cartPage = homePage.gotoCartPage(driver);
-    }
 
     @BeforeAll
     static void setupAll() {
         POMUtils.setDriverLocation(DRIVER_LOCATION);
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver(DriverOptions.CHROME);
     }
 
     @BeforeEach
@@ -44,10 +38,10 @@ public class CartPageTest {
     @Test
     @DisplayName("Check continue shopping button returns to HomePage")
     void checkContinueShoppingButtonReturnsToHomePage() {
-        cartPage = homePage.gotoCartPage(driver);
-        homePage = cartPage.clickContinueShopping(driver);
+        homePage = homePage.gotoCartPage(driver).clickContinueShopping(driver);
         Assertions.assertEquals("https://www.saucedemo.com/inventory.html", homePage.getUrl());
     }
+
     @Test
     @DisplayName("Check that when continue shopping and going back to cart items persists")
     void checkThatWhenContinueShoppingAndGoingBackToCartItemsPersists() {
