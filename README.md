@@ -29,5 +29,5 @@ These are the test classes prepared for testers to be used based on the test met
 - LoginPageTests.
 - NavigationPageTests.
 
-## Instructions to Run the Programm
+## Instructions to Run the Programme
 

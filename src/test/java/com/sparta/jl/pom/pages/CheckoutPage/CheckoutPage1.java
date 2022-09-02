@@ -1,6 +1,9 @@
-package com.sparta.jl.pom.pages;
+package com.sparta.jl.pom.pages.CheckoutPage;
 
 
+import com.sparta.jl.pom.pages.CartPage;
+import com.sparta.jl.pom.pages.LoginPage;
+import com.sparta.jl.pom.pages.NavigationPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +26,7 @@ public class CheckoutPage1 extends NavigationPage {
 
     public CheckoutPage2 goToCheckoutPage2(String firstNameInput, String lastNameInput, String postalCodeInput) {
         driver.findElement(firstName).sendKeys(firstNameInput, Keys.TAB, lastNameInput, Keys.TAB, postalCodeInput, Keys.ENTER);
-        return new CheckoutPage2();
+        return new CheckoutPage2(driver);
     }
 
     public String emptyFields() {
@@ -37,7 +40,7 @@ public class CheckoutPage1 extends NavigationPage {
             return "good to go";
         }
     }
-
+/*
     @Override
     public String getURLFromTwitterLink() {
         return super.getURLFromTwitterLink();
@@ -67,7 +70,7 @@ public class CheckoutPage1 extends NavigationPage {
     public String getUrlFromLogoutSideBar() {
         return super.getUrlFromLogoutSideBar();
     }
-
+*/
     @Override
     public CartPage goToCheckoutPageFromCartIcon() {
         return super.goToCheckoutPageFromCartIcon();
