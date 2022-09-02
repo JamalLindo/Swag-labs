@@ -1,14 +1,11 @@
 package com.sparta.jl.pom.pages.CheckoutPage;
 
 import com.sparta.jl.pom.pages.CartPage;
-import com.sparta.jl.pom.pages.HomePage;
-import com.sparta.jl.pom.pages.LoginPage;
 import com.sparta.jl.pom.pages.NavigationPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-public class CheckoutPage1 extends NavigationPage {
+public class CheckoutStepOnePage extends NavigationPage {
     WebDriver driver;
 
     private static final By firstName = By.id("first-name");
@@ -19,7 +16,7 @@ public class CheckoutPage1 extends NavigationPage {
     private static final By cancelButton = new By.ById("cancel");
     private static final By continueButton = By.id("continue");
 
-    public CheckoutPage1(WebDriver driver) {
+    public CheckoutStepOnePage(WebDriver driver) {
         this.driver = driver;
         driver.findElement(shoppingCartLink).click();
         driver.findElement(checkoutBtn).click();
@@ -35,12 +32,12 @@ public class CheckoutPage1 extends NavigationPage {
         return new CartPage(driver);
     }
 
-    public CheckoutPage2 goToCheckoutPage2() {
+    public CheckoutStepTwoPage goToCheckoutPage2() {
         driver.findElement(firstName).sendKeys("Alice");
         driver.findElement(lastName).sendKeys("Bob");
         driver.findElement(postalCode).sendKeys("123");
         driver.findElement(continueButton).click();
-        return new CheckoutPage2(driver);
+        return new CheckoutStepTwoPage(driver);
     }
 
     public String emptyFields() {
@@ -65,3 +62,4 @@ public class CheckoutPage1 extends NavigationPage {
         return super.getUrlFromCartLink();
     }
 }
+

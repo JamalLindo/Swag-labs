@@ -2,6 +2,7 @@ package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CartPage;
+import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepOnePage;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
@@ -12,7 +13,6 @@ public class CartPageTest {
     static WebDriver driver;
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver";
     private CartPage cartPage;
-
 
     @BeforeAll
     static void setupAll() {
@@ -80,5 +80,14 @@ public class CartPageTest {
     @AfterAll
     static void tearDownAll() {
         driver.quit();
+    }
+
+    @AfterEach
+    void tearDown() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
