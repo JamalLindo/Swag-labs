@@ -1,6 +1,8 @@
 package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
+import com.sparta.jl.pom.drivers.DriverFactory;
+import com.sparta.jl.pom.drivers.DriverOptions;
 import com.sparta.jl.pom.pages.CartPage;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutCompletePage;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepOnePage;
@@ -9,30 +11,26 @@ import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CheckoutStepTwoPageTest {
+public class CheckoutStepTwoPageTests {
     static WebDriver driver;
     private HomePage homePage;
-    private LoginPage loginPage;
-    private CartPage cartPage;
     private CheckoutStepTwoPage checkoutStepTwoPage;
     private CheckoutStepOnePage checkoutStepOnePage;
-    private CheckoutCompletePage checkoutCompletePage;
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
 
 
     @BeforeAll
     static void setupAll() {
         POMUtils.setDriverLocation(DRIVER_LOCATION);
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver(DriverOptions.CHROME);
     }
 
     @BeforeEach
     void setup() {
-        loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         homePage = loginPage.goToHomePage();
         checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
     }
@@ -53,14 +51,14 @@ public class CheckoutStepTwoPageTest {
     @Test
     @DisplayName("Check finish shopping button goes to CheckoutComplete page")
     void checkFinishButtonReturnsToCheckoutCompletePage() {
-        checkoutCompletePage = checkoutStepTwoPage.goToFinish(driver);
+        CheckoutCompletePage checkoutCompletePage = checkoutStepTwoPage.goToFinish(driver);
         assertEquals("https://www.saucedemo.com/checkout-complete.html", checkoutCompletePage.getUrl());
     }
 
     @Test
     @DisplayName("Check that correct amount of items in cart")
     void checkThatCorrectAmountOfItemsInCart() {
-        cartPage = homePage.gotoCartPage(driver);
+        CartPage cartPage = homePage.gotoCartPage(driver);
         Assertions.assertEquals(0, checkoutStepTwoPage.listOfItems().size());
     }
 

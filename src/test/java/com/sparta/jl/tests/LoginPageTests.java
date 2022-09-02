@@ -1,20 +1,24 @@
 package com.sparta.jl.tests;
+import com.sparta.jl.pom.POMUtils;
+import com.sparta.jl.pom.drivers.DriverFactory;
+import com.sparta.jl.pom.drivers.DriverOptions;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 public class LoginPageTests {
     private static WebDriver driver;
     private static LoginPage loginPage;
+    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
+
     @BeforeAll
     static void setupAll() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
+        POMUtils.setDriverLocation(DRIVER_LOCATION);
+        driver = DriverFactory.getDriver(DriverOptions.CHROME);
     }
     @BeforeEach
     void setup() {
         driver.get("https://www.saucedemo.com/");
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver(DriverOptions.CHROME);
         loginPage = new LoginPage(driver);
     }
     @Test

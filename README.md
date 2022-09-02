@@ -19,15 +19,23 @@ Because the webdriver file is located under the resource directory, it is includ
 **Pages:**
 - LoginPage - This class has the password and usernames used for the login. Test methods for the login page (https://www.saucedemo.com/) are also declared under this class. These methods include tests for all accepted usernames listed on the login page. Moreover, assuming that a user might insert a username that does not match any user in this service, we have provided a method for this case that tests the error message returned as a response for this invalid username.
 - HomePage - This class has test methods for the home page (https://www.saucedemo.com/inventory.html). These methods include tests for adding and removing available products to/from the cart.
-- CheckoutPage - Test methods for the logout button located under the sidebar.
-NavigationPage -
+- CheckoutPage package -  Package contains classes for the three checkout pages.
+- CartPage - This class has test methods from the cart page (https://www.saucedemo.com/cart.html)
+- NavigationPage - This is an abstract class that has method to test the sidebar, footer and cart icon that are on all pages (except login page)
 
 **Tests:**
 
 These are the test classes prepared for testers to be used based on the test methods previously created under the Pages package. Classes created under the Tests package include:
-- HomePageTests.
-- LoginPageTests.
-- NavigationPageTests.
+- HomePageTests
+- LoginPageTests
+- NavigationPageTests
+- CheckoutCompletePageTests
+- CheckoutStepOnePageTests
+- CheckoutStepTwoPageTests
+- CartPageTests
+
 
 ## Instructions to Run the Programme
+
+Create a resource directory in src/test and place your driver (chrome, firefox or safari) there. If using mac remove .exe from path name 
 

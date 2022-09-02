@@ -29,11 +29,16 @@ public class CartPage extends NavigationPage{
         setDriver(driver);
     }
 
+    public void goToHomePageFromLogin(){
+        loginPage = new LoginPage(driver);
+        homePage = loginPage.goToHomePage();
+    }
+
     public String getUrl() {
         return driver.getCurrentUrl();
     }
 
-    public HomePage clickContinueShopping(WebDriver driver) {
+    public HomePage clickContinueShopping() {
         driver.findElement(continueShoppingBtn).click();
         return new HomePage(driver);
     }
@@ -76,35 +81,23 @@ public class CartPage extends NavigationPage{
     }
 
     public boolean isItemsPersistent() {
-        loginPage = new LoginPage(driver);
-        homePage = loginPage.goToHomePage();
-        homePage.addAllItemsToCart();
-        homePage.gotoCartPage(driver);
+        addAllItemsAndGoToCartPage();
         List expected = listOfItems();
-        homePage = clickContinueShopping(driver);
+        homePage = clickContinueShopping();
         homePage.gotoCartPage(driver);
         List actual = listOfItems();
         return actual.size() == expected.size();
     }
 
     public boolean isReturnItemListCorrect() {
-        loginPage = new LoginPage(driver);
-        homePage = loginPage.goToHomePage();
-        homePage.addAllItemsToCart();
-        homePage.gotoCartPage(driver);
+        addAllItemsAndGoToCartPage();
         String actual = listOfItemNames().toString();
-        String expected = "[Test.allTheThings() T-Shirt (Red)" +
-                ", Sauce Labs Onesie" +
-                ", Sauce Labs Fleece Jacket" +
-                ", Sauce Labs Bolt T-Shirt" +
-                ", Sauce Labs Bike Light" +
-                ", Sauce Labs Backpack]";
+        String expected = "[Sauce Labs Backpack, Sauce Labs Bike Light, Sauce Labs Bolt T-Shirt, Sauce Labs Fleece Jacket, Sauce Labs Onesie, Test.allTheThings() T-Shirt (Red)]";
         return (actual.equals(expected));
     }
 
     public int numberOfSomeItemsInCart() {
-        loginPage = new LoginPage(driver);
-        homePage = loginPage.goToHomePage();
+       goToHomePageFromLogin();
         homePage.addBikeLightToCart();
         homePage.addBoltTShirtToCart();
         homePage.gotoCartPage(driver);
@@ -112,36 +105,30 @@ public class CartPage extends NavigationPage{
     }
 
     public int numberOfAllItemsInCart() {
-        loginPage = new LoginPage(driver);
-        homePage = loginPage.goToHomePage();
-        homePage.addAllItemsToCart();
-        homePage.gotoCartPage(driver);
+        addAllItemsAndGoToCartPage();
         return listOfItems().size();
     }
 
-    public int removeAllItemsButton(){
-        loginPage = new LoginPage(driver);
-        homePage = loginPage.goToHomePage();
+    private void addAllItemsAndGoToCartPage() {
+        goToHomePageFromLogin();
         homePage.addAllItemsToCart();
         homePage.gotoCartPage(driver);
+    }
+
+    public int removeAllItemsButton(){
+        addAllItemsAndGoToCartPage();
         removeAllItems();
         return listOfItems().size();
     }
 
     public int removeOneItemButton() {
-        loginPage = new LoginPage(driver);
-        homePage=loginPage.goToHomePage();
-        homePage.addAllItemsToCart();
-        homePage.gotoCartPage(driver);
+        addAllItemsAndGoToCartPage();
         removeBackpack();
         return listOfItems().size();
     }
 
     public boolean numberOfRemoveButtons() {
-        loginPage = new LoginPage(driver);
-        homePage=loginPage.goToHomePage();
-        homePage.addAllItemsToCart();
-        homePage.gotoCartPage(driver);
+        addAllItemsAndGoToCartPage();
         return listOfRemoveItemBtn().size() == listOfItems().size();
     }
 }
