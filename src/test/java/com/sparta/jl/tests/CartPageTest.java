@@ -2,6 +2,7 @@ package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CartPage;
+import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepOnePage;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
@@ -15,18 +16,8 @@ public class CartPageTest {
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
     private CartPage cartPage;
     private HomePage homePage;
-    private CheckoutPage1 checkoutPage1;
+    private CheckoutStepOnePage checkoutStepOnePage;
     private LoginPage loginPage;
-
-    public void addAllItemToBasket() {
-        homePage.addBackpackToCart();
-        homePage.addBikeLightToCart();
-        homePage.addBoltTShirtToCart();
-        homePage.addFleeceJacketToCart();
-        homePage.addOnesieToCart();
-        homePage.addRedTShirtToCart();
-        cartPage = homePage.gotoCartPage(driver);
-    }
 
     @BeforeAll
     static void setupAll() {
@@ -120,11 +111,21 @@ public class CartPageTest {
     @Test
     @DisplayName("Check Checkout button goes to correct url")
     void checkCheckoutButtonGoesToCorrectUrl() {
-        checkoutPage1 = cartPage.clickCheckout(driver);
-        Assertions.assertEquals("https://www.saucedemo.com/checkout-step-one.html", checkoutPage1.getURL());
+        cartPage = homePage.gotoCartPage(driver);
+        checkoutStepOnePage = cartPage.clickCheckout(driver);
+        Assertions.assertEquals("https://www.saucedemo.com/checkout-step-one.html", checkoutStepOnePage.getURL());
     }
     @AfterAll
     static void tearDownAll() {
         driver.quit();
+    }
+
+    @AfterEach
+    void tearDown() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
