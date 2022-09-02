@@ -1,21 +1,17 @@
 package com.sparta.jl.tests;
 
-
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.drivers.DriverFactory;
 import com.sparta.jl.pom.drivers.DriverOptions;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class NavigationPageTests {
 
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
-    private static LoginPage loginPage;
     static WebDriver driver;
     static HomePage homePage;
 
@@ -28,7 +24,7 @@ public class NavigationPageTests {
 
     @BeforeEach
     void setup() {
-        loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         homePage = loginPage.goToHomePage();
     }
 

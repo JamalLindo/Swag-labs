@@ -4,14 +4,12 @@ import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.drivers.DriverFactory;
 import com.sparta.jl.pom.drivers.DriverOptions;
 import com.sparta.jl.pom.pages.CartPage;
-import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepOnePage;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class CartPageTest {
+public class CartPageTests {
     static WebDriver driver;
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
     private CartPage cartPage;
@@ -80,7 +78,7 @@ public class CartPageTest {
     void checkCheckoutButtonGoesToCorrectUrl() {
         Assertions.assertEquals("https://www.saucedemo.com/checkout-step-one.html", cartPage.clickCheckout(driver).getURL());
     }
-    
+
     @AfterAll
     static void tearDownAll() {
         driver.quit();

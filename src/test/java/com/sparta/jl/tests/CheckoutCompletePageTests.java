@@ -8,14 +8,11 @@ import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CheckoutCompletePageTest {
+public class CheckoutCompletePageTests {
     static WebDriver driver;
-    private HomePage homePage;
-    private LoginPage loginPage;
     private CheckoutCompletePage checkoutCompletePage;
 
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
@@ -28,8 +25,8 @@ public class CheckoutCompletePageTest {
 
     @BeforeEach
     void setup() {
-        loginPage = new LoginPage(driver);
-        homePage = loginPage.goToHomePage();
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = loginPage.goToHomePage();
         checkoutCompletePage = new CheckoutCompletePage(driver);
     }
 

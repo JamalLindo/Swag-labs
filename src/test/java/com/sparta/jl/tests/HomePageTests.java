@@ -4,30 +4,25 @@ import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.drivers.DriverFactory;
 import com.sparta.jl.pom.drivers.DriverOptions;
 import com.sparta.jl.pom.pages.HomePage;
-import com.sparta.jl.pom.HomePageUtils;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class HomePageTests {
     private static WebDriver driver;
     private static HomePage homePage;
-    private static LoginPage loginPage;
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
 
     @BeforeAll
     static void setupAll() {
         POMUtils.setDriverLocation(DRIVER_LOCATION);
         driver = DriverFactory.getDriver(DriverOptions.CHROME);
-        loginPage = new LoginPage(driver);
-        homePage = loginPage.goToHomePage();
-
     }
 
     @BeforeEach
     void setup() {
-
+        LoginPage loginPage = new LoginPage(driver);
+        homePage = loginPage.goToHomePage();
     }
 
     @Test

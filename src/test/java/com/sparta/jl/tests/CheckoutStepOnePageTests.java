@@ -8,12 +8,9 @@ import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CheckoutStepOnePageTests {
     static WebDriver driver;
-    private HomePage homePage;
-    private LoginPage loginPage;
     private CheckoutStepOnePage checkoutStepOnePage;
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
 
@@ -25,8 +22,8 @@ public class CheckoutStepOnePageTests {
 
     @BeforeEach
     void setup() {
-        loginPage = new LoginPage(driver);
-        homePage = loginPage.goToHomePage();
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = loginPage.goToHomePage();
         checkoutStepOnePage = new CheckoutStepOnePage(driver);
     }
 
