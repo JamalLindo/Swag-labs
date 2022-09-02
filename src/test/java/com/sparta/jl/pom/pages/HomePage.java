@@ -113,5 +113,13 @@ public class HomePage extends NavigationPage {
 
         return priceList;
     }
+    public void addAllItemsToCart() {
+        driver.findElement(addToCartRedTShirtButton).click();
+        driver.findElement(addToCartOnesieButton).click();
+        driver.findElement(addToCartFleeceJacketButton).click();
+        driver.findElement(addToCartBoltTShirtButton).click();
+        driver.findElement(addToCartBikeLightButton).click();
+        driver.findElement(addToCartBackpackButton).click();
+    }
 }
 
