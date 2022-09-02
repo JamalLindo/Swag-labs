@@ -32,8 +32,9 @@ public class CartPageTest {
     @Test
     @DisplayName("Check continue shopping button returns to HomePage")
     void checkContinueShoppingButtonReturnsToHomePage() {
-        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", cartPage.clickContinueShopping(driver).getUrl());
+        Assertions.assertEquals("https://www.saucedemo.com/inventory.html", cartPage.clickContinueShopping().getUrl());
     }
+
     @Test
     @DisplayName("Check that when continue shopping and going back to cart items persists")
     void checkThatWhenContinueShoppingAndGoingBackToCartItemsPersists() {
@@ -79,6 +80,7 @@ public class CartPageTest {
     void checkCheckoutButtonGoesToCorrectUrl() {
         Assertions.assertEquals("https://www.saucedemo.com/checkout-step-one.html", cartPage.clickCheckout(driver).getURL());
     }
+    
     @AfterAll
     static void tearDownAll() {
         driver.quit();
