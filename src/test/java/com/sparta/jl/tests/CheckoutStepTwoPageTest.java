@@ -1,6 +1,8 @@
 package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
+import com.sparta.jl.pom.drivers.DriverFactory;
+import com.sparta.jl.pom.drivers.DriverOptions;
 import com.sparta.jl.pom.pages.CartPage;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutCompletePage;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepOnePage;
@@ -27,7 +29,7 @@ public class CheckoutStepTwoPageTest {
     @BeforeAll
     static void setupAll() {
         POMUtils.setDriverLocation(DRIVER_LOCATION);
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver(DriverOptions.CHROME);
     }
 
     @BeforeEach

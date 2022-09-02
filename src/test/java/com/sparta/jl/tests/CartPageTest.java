@@ -1,6 +1,8 @@
 package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
+import com.sparta.jl.pom.drivers.DriverFactory;
+import com.sparta.jl.pom.drivers.DriverOptions;
 import com.sparta.jl.pom.pages.CartPage;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepOnePage;
 import com.sparta.jl.pom.pages.HomePage;
@@ -11,13 +13,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CartPageTest {
     static WebDriver driver;
-    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver";
+    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
     private CartPage cartPage;
 
     @BeforeAll
     static void setupAll() {
         POMUtils.setDriverLocation(DRIVER_LOCATION);
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver(DriverOptions.CHROME);
     }
 
     @BeforeEach

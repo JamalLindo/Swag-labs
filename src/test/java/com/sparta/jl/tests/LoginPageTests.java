@@ -1,4 +1,6 @@
 package com.sparta.jl.tests;
+import com.sparta.jl.pom.drivers.DriverFactory;
+import com.sparta.jl.pom.drivers.DriverOptions;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -9,12 +11,12 @@ public class LoginPageTests {
     @BeforeAll
     static void setupAll() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver(DriverOptions.CHROME);
     }
     @BeforeEach
     void setup() {
         driver.get("https://www.saucedemo.com/");
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver(DriverOptions.CHROME);
         loginPage = new LoginPage(driver);
     }
     @Test
