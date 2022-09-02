@@ -2,20 +2,19 @@ package com.sparta.jl.pom.pages.CheckoutPage;
 
 
 import com.sparta.jl.pom.pages.CartPage;
-import com.sparta.jl.pom.pages.LoginPage;
 import com.sparta.jl.pom.pages.NavigationPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-public class CheckoutPage1 extends NavigationPage {
+public class CheckoutStepOnePage extends NavigationPage {
     WebDriver driver;
 
     private final By firstName = By.id("first-name");
     private final By lastName = By.id("last-name");
     private final By postalCode = By.id("postal-code");
 
-    public CheckoutPage1(WebDriver driver) {
+    public CheckoutStepOnePage(WebDriver driver) {
         this.driver = driver;
         setDriver(driver);
     }
@@ -24,9 +23,9 @@ public class CheckoutPage1 extends NavigationPage {
         return driver.getCurrentUrl();
     }
 
-    public CheckoutPage2 goToCheckoutPage2(String firstNameInput, String lastNameInput, String postalCodeInput, WebDriver driver) {
+    public CheckoutStepTwoPage goToCheckoutPage2(String firstNameInput, String lastNameInput, String postalCodeInput, WebDriver driver) {
         driver.findElement(firstName).sendKeys(firstNameInput, Keys.TAB, lastNameInput, Keys.TAB, postalCodeInput, Keys.ENTER);
-        return new CheckoutPage2(driver);
+        return new CheckoutStepTwoPage(driver);
     }
 
     public String emptyFields() {

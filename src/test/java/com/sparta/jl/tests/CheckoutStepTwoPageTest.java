@@ -3,8 +3,8 @@ package com.sparta.jl.tests;
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CartPage;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutCompletePage;
-import com.sparta.jl.pom.pages.CheckoutPage.CheckoutPage1;
-import com.sparta.jl.pom.pages.CheckoutPage.CheckoutPage2;
+import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepOnePage;
+import com.sparta.jl.pom.pages.CheckoutPage.CheckoutStepTwoPage;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
@@ -13,13 +13,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CheckoutPage2Test {
+public class CheckoutStepTwoPageTest {
     static WebDriver driver;
     private HomePage homePage;
     private LoginPage loginPage;
     private CartPage cartPage;
-    private CheckoutPage2 checkoutPage2;
-    private CheckoutPage1 checkoutPage1;
+    private CheckoutStepTwoPage checkoutPage2;
+    private CheckoutStepOnePage checkoutPage1;
     private CheckoutCompletePage checkoutCompletePage;
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver";
 
@@ -36,7 +36,6 @@ public class CheckoutPage2Test {
         homePage = loginPage.goToHomePage();
         checkoutPage2 = new CheckoutPage2(driver);
         */
-
 
         loginPage = new LoginPage(driver);
         homePage = loginPage.goToHomePage();
@@ -80,8 +79,8 @@ public class CheckoutPage2Test {
         Assertions.assertEquals("https://www.saucedemo.com/cart.html", checkoutPage2.getUrlFromCartLink());
     }
 
-    //@Nested
-    //class SidebarTests{
+    @Nested
+    class SidebarTests{
 
         @Test
         @DisplayName("Check that the all items sidebar goes to homepage ")
@@ -112,7 +111,7 @@ public class CheckoutPage2Test {
         void checkThatTheResetAppStateSidebarLinkFromTheCartPageStaysOnTheSameUrl() {
             assertEquals("https://www.saucedemo.com/cart.html", checkoutPage2.goToCheckoutPageFromCartIcon().getUrlFromResetAppStateSidebarLink());
         }
-    //}
+    }
 
     @AfterAll
     static void tearDownAll() {
