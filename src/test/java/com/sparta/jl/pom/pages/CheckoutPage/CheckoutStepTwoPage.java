@@ -37,6 +37,7 @@ public class CheckoutPage2 extends NavigationPage {
         this.driver = driver;
         driver.findElement(shoppingCartLink).click();
         driver.findElement(checkoutBtn).click();
+
         driver.findElement(firstName).sendKeys("Leonardo");
         driver.findElement(lastName).sendKeys("DiCaprio");
         driver.findElement(postalCode).sendKeys("XYZ");

@@ -3,6 +3,7 @@ package com.sparta.jl.tests;
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CartPage;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutCompletePage;
+import com.sparta.jl.pom.pages.CheckoutPage.CheckoutPage1;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutPage2;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
@@ -18,6 +19,7 @@ public class CheckoutPage2Test {
     private LoginPage loginPage;
     private CartPage cartPage;
     private CheckoutPage2 checkoutPage2;
+    private CheckoutPage1 checkoutPage1;
     private CheckoutCompletePage checkoutCompletePage;
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver";
 
@@ -29,9 +31,18 @@ public class CheckoutPage2Test {
 
     @BeforeEach
     void setup() {
+        /*
         loginPage = new LoginPage(driver);
         homePage = loginPage.goToHomePage();
         checkoutPage2 = new CheckoutPage2(driver);
+        */
+
+
+        loginPage = new LoginPage(driver);
+        homePage = loginPage.goToHomePage();
+        cartPage = homePage.gotoCartPage(driver);
+        checkoutPage1 = cartPage.gotoCheckoutPage1(driver);
+        checkoutPage2 = checkoutPage1.goToCheckoutPage2("Leonardo", "DiCaprio", "XYZ", driver);
     }
 
     @Test
@@ -58,9 +69,9 @@ public class CheckoutPage2Test {
     @DisplayName("Check that correct amount of items in cart")
     void checkThatCorrectAmountOfItemsInCart() {
         cartPage = homePage.gotoCartPage(driver);
-        //homePage.addBikeLightToCart();
-        //homePage.addBoltTShirtToCart();
-        Assertions.assertEquals(0, checkoutPage2.listOfItems().size());
+        homePage.addBikeLightToCart();
+        homePage.addBoltTShirtToCart();
+        Assertions.assertEquals(2, checkoutPage2.listOfItems().size());
     }
 
     @Test
@@ -105,6 +116,6 @@ public class CheckoutPage2Test {
 
     @AfterAll
     static void tearDownAll() {
-        driver.quit();
+        //driver.quit();
     }
 }

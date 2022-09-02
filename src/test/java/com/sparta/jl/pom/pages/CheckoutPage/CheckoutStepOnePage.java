@@ -24,7 +24,7 @@ public class CheckoutPage1 extends NavigationPage {
         return driver.getCurrentUrl();
     }
 
-    public CheckoutPage2 goToCheckoutPage2(String firstNameInput, String lastNameInput, String postalCodeInput) {
+    public CheckoutPage2 goToCheckoutPage2(String firstNameInput, String lastNameInput, String postalCodeInput, WebDriver driver) {
         driver.findElement(firstName).sendKeys(firstNameInput, Keys.TAB, lastNameInput, Keys.TAB, postalCodeInput, Keys.ENTER);
         return new CheckoutPage2(driver);
     }
