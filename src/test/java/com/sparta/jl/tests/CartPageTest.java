@@ -2,31 +2,21 @@ package com.sparta.jl.tests;
 
 import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CartPage;
+import com.sparta.jl.pom.pages.CheckoutPage.CheckoutPage1;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.List;
-
 public class CartPageTest {
     static WebDriver driver;
-    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
+    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver";
     private CartPage cartPage;
     private HomePage homePage;
     private CheckoutPage1 checkoutPage1;
     private LoginPage loginPage;
 
-    public void addAllItemToBasket() {
-        homePage.addBackpackToCart();
-        homePage.addBikeLightToCart();
-        homePage.addBoltTShirtToCart();
-        homePage.addFleeceJacketToCart();
-        homePage.addOnesieToCart();
-        homePage.addRedTShirtToCart();
-        cartPage = homePage.gotoCartPage(driver);
-    }
 
     @BeforeAll
     static void setupAll() {
@@ -39,6 +29,7 @@ public class CartPageTest {
         loginPage = new LoginPage(driver);
 //        loginPage.loginToPage("standard_user");  //doesn't work
         homePage = loginPage.goToHomePage();
+        cartPage = homePage.gotoCartPage(driver);
     }
 
     @Test
@@ -51,62 +42,36 @@ public class CartPageTest {
     @Test
     @DisplayName("Check that when continue shopping and going back to cart items persists")
     void checkThatWhenContinueShoppingAndGoingBackToCartItemsPersists() {
-        homePage.addAllItemsToCart();
-        cartPage = homePage.gotoCartPage(driver);
-        List expected = cartPage.listOfItems();
-        homePage = cartPage.clickContinueShopping(driver);
-        cartPage = homePage.gotoCartPage(driver);
-        List actual = cartPage.listOfItems();
-        Assertions.assertEquals(expected.size(), actual.size());
+        Assertions.assertTrue(cartPage.isItemsPersistent());
     }
 
     @Test
     @DisplayName("Check that return list item names are correct")
     void checkThatReturnListItemNamesAreCorrect() {
-        homePage.addAllItemsToCart();
-        cartPage = homePage.gotoCartPage(driver);
-        List actual = cartPage.listOfItemNames();
-        String expected = "[Test.allTheThings() T-Shirt (Red)" +
-                ", Sauce Labs Onesie" +
-                ", Sauce Labs Fleece Jacket" +
-                ", Sauce Labs Bolt T-Shirt" +
-                ", Sauce Labs Bike Light" +
-                ", Sauce Labs Backpack]";
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertTrue(cartPage.isReturnItemListCorrect());
     }
+
     @Test
     @DisplayName("Check that correct amount of items in cart")
     void checkThatCorrectAmountOfItemsInCart() {
-        homePage.addBikeLightToCart();
-        homePage.addBoltTShirtToCart();
-        cartPage = homePage.gotoCartPage(driver);
-        int actual = cartPage.listOfItems().size();
-        Assertions.assertEquals(2,actual);
+        Assertions.assertEquals(2,cartPage.numberOfSomeItemsInCart());
     }
     @Test
     @DisplayName("Check that when all items added is correct amount")
     void checkThatWhenAllItemsAddedIsCorrectAmount() {
-        homePage.addAllItemsToCart();
-        cartPage = homePage.gotoCartPage(driver);
-        int actual = cartPage.listOfItems().size();
-        Assertions.assertEquals(6,actual);
+        Assertions.assertEquals(6,cartPage.numberOfAllItemsInCart());
     }
+
     @Test
     @DisplayName("Check all remove buttons work")
     void checkAllRemoveButtonsWork() {
-        homePage.addAllItemsToCart();
-        cartPage = homePage.gotoCartPage(driver);
-        cartPage.removeAllItems();
-        int actual = cartPage.listOfItems().size();
-        Assertions.assertEquals(0,actual);
+        Assertions.assertEquals(0,cartPage.removeAllItemsButton());
     }
     @Test
     @DisplayName("Check that the remove buttons work")
     void checkThatTheRemoveButtonsWork() {
-        homePage.addAllItemsToCart();
-        cartPage = homePage.gotoCartPage(driver);
-        cartPage.removeBackpack();
-        Assertions.assertEquals(5, cartPage.listOfItems().size());
+
+        Assertions.assertEquals(5, cartPage.removeOneItemButton());
     }
 
     @Test
