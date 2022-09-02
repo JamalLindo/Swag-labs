@@ -1,11 +1,10 @@
 package com.sparta.jl.pom.pages;
 
+import com.sparta.jl.pom.HomePageUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HomePage extends NavigationPage {
@@ -60,6 +59,15 @@ public class HomePage extends NavigationPage {
     }
     public void addBackpackToCart() { driver.findElement(addToCartBackpackButton).click(); }
 
+    public void addAllItemsToCart() {
+        addBackpackToCart();
+        addBikeLightToCart();
+        addBoltTShirtToCart();
+        addFleeceJacketToCart();
+        addOnesieToCart();
+        addRedTShirtToCart();
+    }
+
     public void removeRedTShirtFromCart() {
         driver.findElement(removeFromCartRedTShirtButton).click();
     }
@@ -94,13 +102,15 @@ public class HomePage extends NavigationPage {
         driver.findElement(productSortByMenu).click();
         driver.findElement(sortByNameZA).click();
     }
-    public void sortProductsByPriceAscending() {
+    public HomePage sortProductsByPriceAscending() {
         driver.findElement(productSortByMenu).click();
         driver.findElement(sortByPriceLowHigh).click();
+        return this;
     }
-    public void sortProductsByPriceDescending() {
+    public HomePage sortProductsByPriceDescending() {
         driver.findElement(productSortByMenu).click();
         driver.findElement(sortByPriceHighLow).click();
+        return this;
     }
 
     public Double[] getArrayOfPrices() {
@@ -112,6 +122,15 @@ public class HomePage extends NavigationPage {
         }
 
         return priceList;
+    }
+
+    public boolean isPriceAscending() {
+        Double[] priceList = getArrayOfPrices();
+        return HomePageUtils.PriceIsAscending(priceList);
+    }
+    public boolean isPriceDescending() {
+        Double[] priceList = getArrayOfPrices();
+        return HomePageUtils.PriceIsDescending(priceList);
     }
 }
 

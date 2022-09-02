@@ -4,10 +4,7 @@ import com.sparta.jl.pom.POMUtils;
 import com.sparta.jl.pom.pages.CheckoutPage.CheckoutCompletePage;
 import com.sparta.jl.pom.pages.HomePage;
 import com.sparta.jl.pom.pages.LoginPage;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -19,7 +16,7 @@ public class CheckoutCompletePageTest {
     private LoginPage loginPage;
     private CheckoutCompletePage checkoutCompletePage;
 
-    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver";
+    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
 
     @BeforeAll
     static void setupAll() {
@@ -38,5 +35,10 @@ public class CheckoutCompletePageTest {
     @DisplayName("Check that checkoutCompletePage link is correct")
     void checkThatCheckoutCompletePageLinkIsCorrect() {
         assertEquals("https://www.saucedemo.com/checkout-complete.html", checkoutCompletePage.getUrl());
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        driver.quit();
     }
 }

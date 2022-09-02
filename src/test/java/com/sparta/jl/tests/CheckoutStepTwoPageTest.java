@@ -18,10 +18,11 @@ public class CheckoutStepTwoPageTest {
     private HomePage homePage;
     private LoginPage loginPage;
     private CartPage cartPage;
-    private CheckoutStepTwoPage checkoutPage2;
-    private CheckoutStepOnePage checkoutPage1;
+    private CheckoutStepTwoPage checkoutStepTwoPage;
+    private CheckoutStepOnePage checkoutStepOnePage;
     private CheckoutCompletePage checkoutCompletePage;
-    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver";
+    private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
+
 
     @BeforeAll
     static void setupAll() {
@@ -31,36 +32,28 @@ public class CheckoutStepTwoPageTest {
 
     @BeforeEach
     void setup() {
-        /*
         loginPage = new LoginPage(driver);
         homePage = loginPage.goToHomePage();
-        checkoutPage2 = new CheckoutPage2(driver);
-        */
-
-        loginPage = new LoginPage(driver);
-        homePage = loginPage.goToHomePage();
-        cartPage = homePage.gotoCartPage(driver);
-        checkoutPage1 = cartPage.gotoCheckoutPage1(driver);
-        checkoutPage2 = checkoutPage1.goToCheckoutPage2("Leonardo", "DiCaprio", "XYZ", driver);
+        checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
     }
 
     @Test
     @DisplayName("Check that checkoutPage2 link is correct")
     void checkThatCheckoutPage2LinkIsCorrect() {
-        assertEquals("https://www.saucedemo.com/checkout-step-two.html", checkoutPage2.getUrl());
+        assertEquals("https://www.saucedemo.com/checkout-step-two.html", checkoutStepTwoPage.getUrl());
     }
 
     @Test
     @DisplayName("Check cancel button returns to HomePage")
     void checkCancelButtonReturnsToHomePage() {
-        homePage = checkoutPage2.goToCancel(driver);
+        homePage = checkoutStepTwoPage.goToCancel(driver);
         assertEquals("https://www.saucedemo.com/inventory.html", homePage.getUrl());
     }
 
     @Test
     @DisplayName("Check finish shopping button goes to CheckoutComplete page")
     void checkFinishButtonReturnsToCheckoutCompletePage() {
-        checkoutCompletePage = checkoutPage2.goToFinish(driver);
+        checkoutCompletePage = checkoutStepTwoPage.goToFinish(driver);
         assertEquals("https://www.saucedemo.com/checkout-complete.html", checkoutCompletePage.getUrl());
     }
 
@@ -68,15 +61,13 @@ public class CheckoutStepTwoPageTest {
     @DisplayName("Check that correct amount of items in cart")
     void checkThatCorrectAmountOfItemsInCart() {
         cartPage = homePage.gotoCartPage(driver);
-        homePage.addBikeLightToCart();
-        homePage.addBoltTShirtToCart();
-        Assertions.assertEquals(2, checkoutPage2.listOfItems().size());
+        Assertions.assertEquals(0, checkoutStepTwoPage.listOfItems().size());
     }
 
     @Test
     @DisplayName("Check that clicking the cart icon takes you to the Cart page")
     void checkThatClickingTheCartIconTakesYouToTheCartPage() {
-        Assertions.assertEquals("https://www.saucedemo.com/cart.html", checkoutPage2.getUrlFromCartLink());
+        Assertions.assertEquals("https://www.saucedemo.com/cart.html", checkoutStepTwoPage.getUrlFromCartLink());
     }
 
     @Nested
@@ -85,36 +76,37 @@ public class CheckoutStepTwoPageTest {
         @Test
         @DisplayName("Check that the all items sidebar goes to homepage ")
         void checkThatTheAllItemsSidebarGoesToHomepage() {
-            assertEquals("https://www.saucedemo.com/inventory.html", checkoutPage2.getURLFromAllItemsSidebarLink());
+            assertEquals("https://www.saucedemo.com/inventory.html", checkoutStepTwoPage.getURLFromAllItemsSidebarLink());
         }
 
         @Test
         @DisplayName("Check that the about sidebar link works")
         void checkThatTheAboutSidebarLinkWorks() {
-            assertEquals("https://saucelabs.com/", checkoutPage2.getURLFromAboutSidebarLink());
+            assertEquals("https://saucelabs.com/", checkoutStepTwoPage.getURLFromAboutSidebarLink());
         }
 
         @Test
         @DisplayName("Check that the logout sidebar link take you to the login page")
         void checkThatTheLogoutSidebarLinkTakeYouToTheLoginPage() {
-            assertEquals("https://www.saucedemo.com/", checkoutPage2.getUrlFromLogoutSidebarLink());
+            assertEquals("https://www.saucedemo.com/", checkoutStepTwoPage.getUrlFromLogoutSidebarLink());
         }
 
         @Test
         @DisplayName("Check that the reset app state sidebar link from homepage give correct url")
         void checkThatTheResetAppStateSidebarLinkGiveTheSameUrl() {
-            assertEquals("https://www.saucedemo.com/checkout-step-two.html", checkoutPage2.getUrlFromResetAppStateSidebarLink() );
+            assertEquals("https://www.saucedemo.com/checkout-step-two.html", checkoutStepTwoPage.getUrlFromResetAppStateSidebarLink() );
         }
 
         @Test
         @DisplayName("Check that the reset app state sidebar link from the cart page stays on the same url")
         void checkThatTheResetAppStateSidebarLinkFromTheCartPageStaysOnTheSameUrl() {
-            assertEquals("https://www.saucedemo.com/cart.html", checkoutPage2.goToCheckoutPageFromCartIcon().getUrlFromResetAppStateSidebarLink());
+
+            assertEquals("https://www.saucedemo.com/cart.html", checkoutStepTwoPage.goToCheckoutPageFromCartIcon().getUrlFromResetAppStateSidebarLink());
         }
     }
 
     @AfterAll
     static void tearDownAll() {
-        //driver.quit();
+        driver.quit();
     }
 }
